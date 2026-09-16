@@ -1,0 +1,16 @@
+export const techIcons: Record<string, string> = {
+  NestJS: "nestjs",
+  "Node.js": "nodejs",
+  Typescript: "typescript",
+  MongoDB: "mongodb",
+  Docker: "docker",
+  ".NET Core": "csharp",
+  "Azure Functions": "azure-functions",
+  GraphQL: "graphql",
+  Python: "python",
+  MySQL: "mysql",
+  PostgreSQL: "postgresql",
+  Kafka: "kafka",
+  "Next.js": "nextjs",
+  "React.js": "reactjs",
+};
