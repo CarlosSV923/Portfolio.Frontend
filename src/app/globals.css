@@ -718,6 +718,7 @@ img {
   place-items: center;
   padding: 24px;
   background: rgb(3 10 26 / 72%);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 .snake-welcome-modal {
@@ -757,10 +758,12 @@ img {
   place-items: center;
   padding: 24px;
   background: rgb(3 10 26 / 72%);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 .snake-result-modal {
   width: min(100%, 530px);
+  max-height: calc(100vh - 48px);
   max-height: calc(100dvh - 48px);
   padding: 28px;
   overflow-y: auto;
