@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { faviconId, faviconPaths } from "@/constants/favicon";
 import { storageKeys, darkModeQuery } from "@/constants/preferences";
 import type { Language, Theme } from "@/types/portfolio";
 export function usePreferences() {
@@ -20,8 +21,12 @@ export function usePreferences() {
     if (!ready) return;
     const media = matchMedia(darkModeQuery);
     const apply = () => {
-      document.documentElement.dataset.theme =
+      const activeTheme =
         theme === "system" ? (media.matches ? "dark" : "light") : theme;
+      document.documentElement.dataset.theme = activeTheme;
+      document
+        .getElementById(faviconId)
+        ?.setAttribute("href", faviconPaths[activeTheme]);
     };
     apply();
     try {
