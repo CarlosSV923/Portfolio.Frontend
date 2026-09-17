@@ -27,9 +27,31 @@ export const labels = {
     tech: "Tecnologías",
     snake: {
       gameTitle: "Diviértete mientras conoces nuevas tecnologías.",
-      play: "Jugar Snake",
-      intro:
-        "¿Ves una serpiente? Convierte estas tecnologías en un pequeño juego.",
+      play: "Jugar Tech-Snake",
+      intro: "¿Quieres jugar algo y conocer nuevas tecnologías?",
+      mobileIntro:
+        "¿Quieres jugar algo y conocer nuevas tecnologías? Ingresa desde un computador para jugar Tech-Snake.",
+      welcomeTitle: "Bienvenido a Tech-Snake!",
+      welcomeBody:
+        "Para jugar elige una dirección con las flechas, WASD o los controles sobre el tablero para comenzar.",
+      welcomeAction: "A jugar y aprender!",
+      resultWonTitle: "¡Felicitaciones!",
+      resultWonBody:
+        "Capturaste todas las tecnologías que aparecieron en el tablero.",
+      resultLostTitle: "La partida terminó.",
+      resultLostBody: "Estas son las tecnologías que alcanzaste a capturar.",
+      resultEmpty: "Vuelve a intentarlo!",
+      resultCaptured: "Tecnologías capturadas",
+      technologyDescriptions: {
+        Redis: "Almacén de datos en memoria usado para caché y mensajería.",
+        Kubernetes:
+          "Plataforma para automatizar el despliegue y la gestión de contenedores.",
+        AWS: "Plataforma en la nube con servicios de infraestructura y aplicaciones.",
+        Go: "Lenguaje compilado, simple y eficiente creado por Google.",
+        Rust: "Lenguaje de sistemas centrado en rendimiento y seguridad de memoria.",
+        RabbitMQ:
+          "Broker de mensajes para conectar servicios de forma asíncrona.",
+      },
       instructions:
         "Elige una dirección con las flechas, WASD o los controles para comenzar.",
       score: "Tecnologías descubiertas",
@@ -96,8 +118,30 @@ export const labels = {
     tech: "Technologies",
     snake: {
       gameTitle: "Have fun while discovering new technologies.",
-      play: "Play Snake",
-      intro: "See a snake? Turn these technologies into a tiny game.",
+      play: "Play Tech-Snake",
+      intro: "Want to play something and discover new technologies?",
+      mobileIntro:
+        "Want to play something and discover new technologies? Use a computer to play Tech-Snake.",
+      welcomeTitle: "Welcome to Tech-Snake!",
+      welcomeBody:
+        "Choose a direction with the arrow keys, WASD, or the controls above the board to start playing.",
+      welcomeAction: "Play and learn!",
+      resultWonTitle: "Congratulations!",
+      resultWonBody:
+        "You captured every technology that appeared on the board.",
+      resultLostTitle: "Game over.",
+      resultLostBody: "These are the technologies you managed to capture.",
+      resultEmpty: "Try again!",
+      resultCaptured: "Captured technologies",
+      technologyDescriptions: {
+        Redis: "An in-memory data store used for caching and messaging.",
+        Kubernetes:
+          "A platform for automating container deployment and management.",
+        AWS: "A cloud platform with infrastructure and application services.",
+        Go: "A simple, efficient compiled language created by Google.",
+        Rust: "A systems language focused on performance and memory safety.",
+        RabbitMQ: "A message broker that connects services asynchronously.",
+      },
       instructions:
         "Choose a direction with the arrow keys, WASD, or the controls to begin.",
       score: "Technologies discovered",

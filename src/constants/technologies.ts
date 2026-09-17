@@ -13,4 +13,10 @@ export const techIcons: Record<string, string> = {
   Kafka: "kafka",
   "Next.js": "nextjs",
   "React.js": "reactjs",
+  Redis: "redis",
+  Kubernetes: "kubernetes",
+  AWS: "aws",
+  Go: "go",
+  Rust: "rust",
+  RabbitMQ: "rabbitmq",
 };

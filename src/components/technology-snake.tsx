@@ -1,144 +1,27 @@
 "use client";
 
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-  Gamepad2,
-  Pause,
-  Play,
-  RotateCcw,
-  X,
-} from "lucide-react";
+import { Gamepad2, Pause, Play, RotateCcw, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { TechIcon } from "./tech-icon";
-
-type Technology = { readonly name: string };
-type Point = { readonly x: number; readonly y: number };
-type Direction = Point;
-type Segment = Technology & Point;
-type GameStatus = "ready" | "running" | "paused" | "game-over" | "won";
-
-type SnakeCopy = {
-  readonly gameTitle: string;
-  readonly play: string;
-  readonly intro: string;
-  readonly instructions: string;
-  readonly score: string;
-  readonly pause: string;
-  readonly paused: string;
-  readonly resume: string;
-  readonly restart: string;
-  readonly exit: string;
-  readonly gameOver: string;
-  readonly won: string;
-  readonly food: string;
-  readonly moveUp: string;
-  readonly moveDown: string;
-  readonly moveLeft: string;
-  readonly moveRight: string;
-};
-
-type GameState = {
-  readonly snake: Segment[];
-  readonly food: Segment | null;
-  readonly unlocked: string[];
-  readonly status: GameStatus;
-};
-
-const extraTechnologies = [
-  "Redis",
-  "Kubernetes",
-  "AWS",
-  "Go",
-  "Rust",
-  "Vue.js",
-] as const;
-
-const boardColumns = 12;
-const boardRows = 4;
-const gameSpeed = 430;
-
-const directions = {
-  up: { x: 0, y: -1 },
-  down: { x: 0, y: 1 },
-  left: { x: -1, y: 0 },
-  right: { x: 1, y: 0 },
-} as const;
-
-function createPath(columns: number, rows: number) {
-  return Array.from({ length: rows }, (_, y) =>
-    Array.from({ length: columns }, (_, index) => ({
-      x: y % 2 === 0 ? index : columns - index - 1,
-      y,
-    })),
-  ).flat();
-}
-
-function createFood(
-  occupied: readonly Point[],
-  availableNames: readonly string[],
-  columns: number,
-  rows: number,
-): Segment | null {
-  if (availableNames.length === 0) {
-    return null;
-  }
-
-  const openCells = createPath(columns, rows).filter(
-    (cell) =>
-      !occupied.some((point) => point.x === cell.x && point.y === cell.y),
-  );
-
-  if (openCells.length === 0) {
-    return null;
-  }
-
-  const position = openCells[Math.floor(Math.random() * openCells.length)];
-  const name =
-    availableNames[Math.floor(Math.random() * availableNames.length)];
-
-  return { ...position, name };
-}
-
-function createGame(
-  technologies: readonly Technology[],
-  columns: number,
-  rows: number,
-) {
-  const path = createPath(columns, rows);
-  const snakeLength = Math.min(technologies.length, path.length - 1);
-  const firstOpenEvenRow = Math.ceil((snakeLength - 1) / columns / 2) * 2;
-  const headIndex = Math.min(firstOpenEvenRow * columns, path.length - 2);
-  const positions = path
-    .slice(headIndex - snakeLength + 1, headIndex + 1)
-    .reverse();
-  const snake = technologies
-    .slice(0, snakeLength)
-    .map((technology, index) => ({ ...technology, ...positions[index] }));
-  const nextPoint = path[headIndex + 1];
-  const head = positions[0];
-  const direction = {
-    x: nextPoint.x - head.x,
-    y: nextPoint.y - head.y,
-  };
-
-  return {
-    direction,
-    state: {
-      snake,
-      food: createFood(snake, extraTechnologies, columns, rows),
-      unlocked: [],
-      status: "ready" as const,
-    },
-  };
-}
-
-function isOpposite(current: Direction, next: Direction) {
-  return current.x + next.x === 0 && current.y + next.y === 0;
-}
+import {
+  boardColumns,
+  boardRows,
+  createFoodAfterCapture,
+  createGame,
+  directions,
+  gameSpeed,
+  isOpposite,
+} from "./tech-snake/game";
+import { SnakeBoard } from "./tech-snake/snake-board";
+import { SnakeControls } from "./tech-snake/snake-controls";
+import { ResultModal, WelcomeModal } from "./tech-snake/snake-modals";
+import type {
+  Direction,
+  GameState,
+  SnakeCopy,
+  Technology,
+} from "./tech-snake/types";
 
 export function TechnologySnake({
   technologies,
@@ -151,29 +34,33 @@ export function TechnologySnake({
 }>) {
   const [isActive, setIsActive] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
-  const columns = boardColumns;
-  const rows = boardRows;
-  const directionRef = useRef<Direction>(directions.right);
-  const nextDirectionRef = useRef<Direction>(directions.right);
+  const [isWelcomeOpen, setIsWelcomeOpen] = useState(false);
   const [game, setGame] = useState<GameState>({
     snake: [],
     food: null,
     unlocked: [],
     status: "ready",
   });
+  const directionRef = useRef<Direction>(directions.right);
+  const nextDirectionRef = useRef<Direction>(directions.right);
 
   useEffect(() => {
     onActiveChange(isActive);
   }, [isActive, onActiveChange]);
 
-  const startGame = useCallback(() => {
-    const nextGame = createGame(technologies, columns, rows);
+  const resetGame = useCallback(() => {
+    const nextGame = createGame(technologies, boardColumns, boardRows);
 
     directionRef.current = nextGame.direction;
     nextDirectionRef.current = nextGame.direction;
     setGame(nextGame.state);
+  }, [technologies]);
+
+  const startGame = useCallback(() => {
+    resetGame();
+    setIsWelcomeOpen(true);
     setIsActive(true);
-  }, [columns, rows, technologies]);
+  }, [resetGame]);
 
   const changeDirection = useCallback((nextDirection: Direction) => {
     if (!isOpposite(directionRef.current, nextDirection)) {
@@ -202,15 +89,12 @@ export function TechnologySnake({
   }, []);
 
   useEffect(() => {
-    if (!isActive) {
+    if (!isActive || isWelcomeOpen) {
       return;
     }
 
-    const nextGame = createGame(technologies, columns, rows);
-    directionRef.current = nextGame.direction;
-    nextDirectionRef.current = nextGame.direction;
-    setGame(nextGame.state);
-  }, [columns, isActive, rows, technologies]);
+    resetGame();
+  }, [isActive, isWelcomeOpen, resetGame]);
 
   useEffect(() => {
     if (!isActive || game.status !== "running") {
@@ -233,9 +117,9 @@ export function TechnologySnake({
           : currentGame.snake.slice(0, -1);
         const hitWall =
           nextHead.x < 0 ||
-          nextHead.x >= columns ||
+          nextHead.x >= boardColumns ||
           nextHead.y < 0 ||
-          nextHead.y >= rows;
+          nextHead.y >= boardRows;
         const hitSelf = collisionBody.some(
           (segment) => segment.x === nextHead.x && segment.y === nextHead.y,
         );
@@ -256,14 +140,11 @@ export function TechnologySnake({
                 : currentGame.food!.name,
           }));
           const unlocked = [...currentGame.unlocked, currentGame.food.name];
-          const remainingTechnologies = extraTechnologies.filter(
-            (name) => !unlocked.includes(name),
-          );
-          const food = createFood(
+          const food = createFoodAfterCapture(
             movedSnake,
-            remainingTechnologies,
-            columns,
-            rows,
+            unlocked,
+            boardColumns,
+            boardRows,
           );
 
           return {
@@ -290,10 +171,10 @@ export function TechnologySnake({
     }, gameSpeed);
 
     return () => window.clearInterval(timer);
-  }, [columns, game.status, isActive, rows]);
+  }, [game.status, isActive]);
 
   useEffect(() => {
-    if (!isActive) {
+    if (!isActive || isWelcomeOpen) {
       return;
     }
 
@@ -345,7 +226,7 @@ export function TechnologySnake({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [changeDirection, isActive]);
+  }, [changeDirection, isActive, isWelcomeOpen]);
 
   useEffect(() => {
     if (!isActive) {
@@ -374,15 +255,19 @@ export function TechnologySnake({
   if (!isActive) {
     return (
       <>
-        {isLargeScreen && (
-          <div className="snake-launchbar">
-            <p>{copy.intro}</p>
+        <div
+          className={`snake-launchbar ${
+            isLargeScreen ? "" : "snake-launchbar--mobile"
+          }`}
+        >
+          <p>{isLargeScreen ? copy.intro : copy.mobileIntro}</p>
+          {isLargeScreen && (
             <button className="snake-button" type="button" onClick={startGame}>
               <Gamepad2 size={18} />
               {copy.play}
             </button>
-          </div>
-        )}
+          )}
+        </div>
         <div className="skills-grid">
           {technologies.map((technology) => (
             <article className="skill-card" key={technology.name}>
@@ -395,6 +280,7 @@ export function TechnologySnake({
     );
   }
 
+  const gameHasEnded = game.status === "game-over" || game.status === "won";
   const statusMessage =
     game.status === "game-over"
       ? copy.gameOver
@@ -403,7 +289,6 @@ export function TechnologySnake({
         : game.status === "paused"
           ? copy.paused
           : copy.instructions;
-  const gameHasEnded = game.status === "game-over" || game.status === "won";
 
   return (
     <div className="snake-game">
@@ -438,7 +323,7 @@ export function TechnologySnake({
             type="button"
             title={copy.restart}
             aria-label={copy.restart}
-            onClick={startGame}
+            onClick={resetGame}
           >
             <RotateCcw size={17} />
           </button>
@@ -453,75 +338,31 @@ export function TechnologySnake({
         </div>
       </div>
 
-      <div className="snake-controls" aria-label={copy.instructions}>
-        <button
-          className="control-up"
-          type="button"
-          aria-label={copy.moveUp}
-          disabled={gameHasEnded}
-          onClick={() => changeDirection(directions.up)}
-        >
-          <ChevronUp />
-        </button>
-        <button
-          className="control-left"
-          type="button"
-          aria-label={copy.moveLeft}
-          disabled={gameHasEnded}
-          onClick={() => changeDirection(directions.left)}
-        >
-          <ChevronLeft />
-        </button>
-        <button
-          className="control-down"
-          type="button"
-          aria-label={copy.moveDown}
-          disabled={gameHasEnded}
-          onClick={() => changeDirection(directions.down)}
-        >
-          <ChevronDown />
-        </button>
-        <button
-          className="control-right"
-          type="button"
-          aria-label={copy.moveRight}
-          disabled={gameHasEnded}
-          onClick={() => changeDirection(directions.right)}
-        >
-          <ChevronRight />
-        </button>
-      </div>
+      <SnakeControls
+        copy={copy}
+        disabled={gameHasEnded}
+        onDirectionChange={changeDirection}
+      />
+      <SnakeBoard
+        columns={boardColumns}
+        rows={boardRows}
+        snake={game.snake}
+        food={game.food}
+        foodLabel={copy.food}
+      />
 
-      <div
-        className="snake-board"
-        style={{
-          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-          gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
-          aspectRatio: `${columns} / ${rows}`,
-        }}
-      >
-        {game.snake.map((segment, index) => (
-          <article
-            className={`skill-card snake-card ${index === 0 ? "snake-head" : ""}`}
-            key={`${segment.name}-${index}`}
-            style={{ gridColumn: segment.x + 1, gridRow: segment.y + 1 }}
-          >
-            <TechIcon name={segment.name} />
-            <span>{segment.name}</span>
-          </article>
-        ))}
-
-        {game.food && (
-          <article
-            className="skill-card snake-card snake-food"
-            style={{ gridColumn: game.food.x + 1, gridRow: game.food.y + 1 }}
-          >
-            <span className="snake-food-label">{copy.food}</span>
-            <TechIcon name={game.food.name} />
-            <span>{game.food.name}</span>
-          </article>
-        )}
-      </div>
+      {isWelcomeOpen && (
+        <WelcomeModal copy={copy} onClose={() => setIsWelcomeOpen(false)} />
+      )}
+      {gameHasEnded && (
+        <ResultModal
+          copy={copy}
+          isWon={game.status === "won"}
+          unlocked={game.unlocked}
+          onRestart={resetGame}
+          onExit={() => setIsActive(false)}
+        />
+      )}
     </div>
   );
 }
