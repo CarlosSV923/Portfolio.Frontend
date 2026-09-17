@@ -71,6 +71,7 @@ export function About({ data, text }: Readonly<SectionProps>) {
               fill
               sizes="(max-width: 700px) calc(100vw - 40px), 52vw"
               className="about-photo"
+              loading="eager"
             />
           </div>
         </div>

@@ -4,32 +4,70 @@ import { useEffect, useState } from "react";
 
 import { techIcons } from "@/constants/technologies";
 
+type IconSource = "svg" | "png" | "monogram";
+
+type IconState = {
+  iconName: string;
+  source: IconSource;
+  ready: boolean;
+};
+
+function nextSource(source: IconSource): IconSource {
+  return source === "svg" ? "png" : "monogram";
+}
+
 export function TechIcon({ name }: Readonly<{ name: string }>) {
   const iconName = techIcons[name];
-  const [source, setSource] = useState<"svg" | "png" | "monogram">("png");
+  const [iconState, setIconState] = useState<IconState>({
+    iconName: "",
+    source: "svg",
+    ready: false,
+  });
 
   useEffect(() => {
     if (!iconName) {
       return;
     }
 
-    let isCurrent = true;
-    const svgIcon = new Image();
+    if (iconState.iconName !== iconName) {
+      setIconState({ iconName, source: "svg", ready: false });
+      return;
+    }
 
-    setSource("png");
-    svgIcon.onload = () => {
+    if (iconState.ready || iconState.source === "monogram") {
+      return;
+    }
+
+    let isCurrent = true;
+    const candidate = new Image();
+
+    candidate.onload = () => {
       if (isCurrent) {
-        setSource("svg");
+        setIconState({ iconName, source: iconState.source, ready: true });
       }
     };
-    svgIcon.src = `/icons/icon_${iconName}.svg`;
+    candidate.onerror = () => {
+      if (isCurrent) {
+        setIconState({
+          iconName,
+          source: nextSource(iconState.source),
+          ready: false,
+        });
+      }
+    };
+    candidate.src = `/icons/icon_${iconName}.${iconState.source}`;
 
     return () => {
       isCurrent = false;
+      candidate.onload = null;
+      candidate.onerror = null;
     };
-  }, [iconName]);
+  }, [iconName, iconState]);
 
-  if (!iconName || source === "monogram") {
+  if (
+    !iconName ||
+    (iconState.iconName === iconName && iconState.source === "monogram")
+  ) {
     return (
       <span className="tech-monogram" aria-hidden="true">
         {name.slice(0, 2)}
@@ -37,12 +75,22 @@ export function TechIcon({ name }: Readonly<{ name: string }>) {
     );
   }
 
+  if (iconState.iconName !== iconName || !iconState.ready) {
+    return <span className="tech-icon tech-icon-loading" aria-hidden="true" />;
+  }
+
   return (
     <img
       className="tech-icon"
-      src={`/icons/icon_${iconName}.${source}`}
+      src={`/icons/icon_${iconName}.${iconState.source}`}
       alt=""
-      onError={() => setSource(source === "svg" ? "png" : "monogram")}
+      onError={() =>
+        setIconState({
+          iconName,
+          source: nextSource(iconState.source),
+          ready: false,
+        })
+      }
     />
   );
 }
