@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Carlos Sesme | Full Stack Developer",
   description:
-    "Portafolio de Carlos Sesme. Desarrollo full stack, microservicios y experiencias web. Guayaquil, Ecuador.",
+    "Personal portfolio of Carlos Sesme, a Full Stack Developer based in Guayaquil, Ecuador. Explore my projects, experience, and technologies.",
 };
 export default function RootLayout({
   children,

@@ -1,36 +1,61 @@
-# Carlos Sesme — Portfolio
+# Carlos Sesme — Personal Portfolio
 
-Portafolio local con Next.js App Router, React y TypeScript.
+A personal portfolio built with Next.js App Router, React, and TypeScript. It showcases my full stack projects, professional experience, education, technologies, and ways to get in touch.
 
-## Ejecutar
+## Features
+
+- English and Spanish content, with the selected language saved in the browser.
+- Light, dark, and system theme options, with matching browser tab icons.
+- Responsive sections for projects, career history, interests, and contact information.
+- Tech-Snake, an optional desktop-only game in the technologies section.
+- Portfolio content stored in local JSON files; no backend or environment variables are required to run the site locally.
+
+## Run locally
+
+Install Node.js 24 and pnpm 12.4.1, then run these commands from the repository root:
 
 ```sh
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Abrir http://localhost:3000. Para producción: `pnpm build` y `pnpm start`.
-Validación de tipos: `pnpm typecheck`.
+Open [http://localhost:3000](http://localhost:3000). The site starts in Spanish and uses the system theme until you choose another option.
 
-## Contenido
+To check the production build locally:
 
-- `src/data/es.json` y `src/data/en.json`: datos del portafolio anterior, conservados en ambos idiomas.
-- `src/app/page.tsx`: composición de las secciones del portafolio.
-- `src/components/`: secciones independientes y componentes compartidos de la interfaz.
-- `src/hooks/`: lógica de preferencias persistentes de tema e idioma.
-- `src/types/`: tipos compartidos de contenido y componentes.
-- `src/constants/`: etiquetas, navegación, tecnologías, iconos y preferencias.
-- `src/app/globals.css`: estilos adaptables y variables para ambos temas.
-- `public/images` y `public/icons`: fotografías, capturas e iconos usados por la interfaz.
-- `public/files/cv.pdf`: copia del CV original en la ruta indicada por los JSON.
+```sh
+pnpm build
+pnpm start
+```
 
-El tema inicial sigue al sistema. Las opciones claro, oscuro y sistema y el idioma se guardan en localStorage. El modo sistema responde a cambios del dispositivo. El sitio inicia en español.
+Other available commands:
 
-Los niveles de habilidades y la descripción profesional conservan los datos originales; conviene actualizarlos si han cambiado. El proyecto Aurora enlaza al sitio de la empresa porque el JSON no contiene demo ni repositorio público. El contacto abre el cliente de correo; no requiere backend. Las fuentes DM Sans y Manrope usan Google Fonts, con respaldo sans-serif.
+| Command             | Purpose                           |
+| ------------------- | --------------------------------- |
+| `pnpm typecheck`    | Check TypeScript types.           |
+| `pnpm format:check` | Check formatting with Prettier.   |
+| `pnpm format`       | Format the project with Prettier. |
 
-## Formato
+## Project structure
 
-`pnpm format` aplica Prettier a los archivos del proyecto.
-`pnpm format:check` verifica el formato sin modificar archivos.
+- `src/app/`: App Router entry point, metadata, and global styles.
+- `src/components/`: Page sections, shared UI, and Tech-Snake components.
+- `src/constants/`: Interface labels, navigation, technology icons, and preferences.
+- `src/data/en.json` and `src/data/es.json`: Portfolio content in both languages.
+- `src/hooks/` and `src/types/`: Preference state and shared types.
+- `public/images/` and `public/icons/`: Images and icons used by the site.
+- `public/files/cv.pdf`: Downloadable résumé.
 
-Se conservan únicamente las imágenes e iconos usados por la interfaz. Las referencias de los JSON a recursos eliminados se dejaron vacías.
+Update both JSON files when changing portfolio content. Interface copy, including the game instructions, lives in `src/constants/labels.ts`. The contact links open an email client or external profiles; there is no contact form or server-side email service.
+
+## Deployment and releases
+
+The repository is prepared for Vercel with `main` as the production branch. After connecting the GitHub repository to Vercel, other branches such as `develop` can receive preview deployments. Import the repository root with the Next.js preset; `vercel.json` declares the framework, and `package.json` selects Node.js 24.
+
+The project pins pnpm 12.4.1. In Vercel, set `ENABLE_EXPERIMENTAL_COREPACK=1` for both Production and Preview so Corepack uses the version specified in `package.json`. Verify a preview build before publishing to production.
+
+Release Please runs on pushes to `main` and can also be started manually from GitHub Actions. It uses Conventional Commits to propose changes to `package.json` and `CHANGELOG.md` in a pull request. Merging that pull request creates a Git tag and GitHub Release. The package is private and is not published to npm.
+
+Enable **Allow GitHub Actions to create and approve pull requests** under **Settings → Actions → General → Workflow permissions** so Release Please can open release pull requests. The workflow uses the repository's `GITHUB_TOKEN`. If other GitHub Actions workflows need to run automatically on pull requests created by Release Please, use a GitHub App token or a personal access token instead.
+
+Vercel deploys changes merged into `main` independently of the later release tag. Review and merge `develop` into `main` before importing the repository for its first production deployment.
