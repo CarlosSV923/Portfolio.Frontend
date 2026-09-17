@@ -1,0 +1,291 @@
+{
+  "general": {
+    "firstName": "Carlos",
+    "avatarPicture": "/images/avatar_picture.jpg",
+    "profession": "Software Developer"
+  },
+  "contact": {
+    "email": "carlos.sesme.923@gmail.com",
+    "address": "Guayaquil, Ecuador",
+    "github": "https://github.com/CarlosSV923",
+    "linkedin": "https://www.linkedin.com/in/carlos-sesme-vera-342769172/"
+  },
+  "about": {
+    "aboutPicture": "/images/about_picture.jpg",
+    "description": "Full Stack Developer with more than five years of professional experience, skilled and passionate about technology. My solid academic background is complemented by ongoing learning of the latest technological trends. I have extensive experience in web development, system design, and project management. I possess outstanding problem-solving skills, proposing innovative, robust, and scalable solutions to technological challenges. My communication, teamwork, and responsibility skills enable me to collaborate effectively in dynamic and challenging work environments.",
+    "urlCurriculum": "files/cv.pdf"
+  },
+  "education": [
+    {
+      "degree": "Basic",
+      "institution": "Dr. Carlos Cevallos Menéndez Public School",
+      "dateFrom": "2003",
+      "dateTo": "2009",
+      "location": "Guayaquil, Ecuador"
+    },
+    {
+      "degree": "General Bachelor in Sciences",
+      "institution": "Vicente Rocafuerte Experimental School",
+      "dateFrom": "2009",
+      "dateTo": "2015",
+      "location": "Guayaquil, Ecuador"
+    },
+    {
+      "degree": "Computer Science Engineer",
+      "institution": "Escuela Superior Politécnica del Litoral - ESPOL",
+      "dateFrom": "2015",
+      "dateTo": "2021",
+      "location": "Guayaquil, Ecuador"
+    }
+  ],
+  "experience": [
+    {
+      "position": "Computer Laboratory Assistant",
+      "company": "Escuela Superior Politécnica del Litoral - ESPOL",
+      "dateFrom": "05/2018",
+      "dateTo": "10/2018",
+      "achievements": [
+        "Assisted in the administration of computer laboratories.",
+        "Performed basic maintenance of computer equipment.",
+        "Supervised access to institutional technological resources."
+      ],
+      "attitudes": [
+        {
+          "name": "Computer Maintenance"
+        },
+        {
+          "name": "Maintenance and Repairs"
+        },
+        {
+          "name": "Hardware"
+        }
+      ],
+      "mode": "On-site",
+      "location": "Guayaquil, Ecuador"
+    },
+    {
+      "position": "Software Development Intern",
+      "company": "BlackBoxEc",
+      "dateFrom": "06/2019",
+      "dateTo": "12/2019",
+      "achievements": [
+        "Web Development of a control system for package arrival registration by Courier.",
+        "Improvements and corrections in mobile applications.",
+        "Improvements and corrections in web applications using ASP.NET technologies.",
+        "Development of a desktop application for processing Excel documents."
+      ],
+      "attitudes": [
+        {
+          "name": "C#"
+        },
+        {
+          "name": "Java"
+        },
+        {
+          "name": "AngularJS"
+        },
+        {
+          "name": "PostgreSQL"
+        },
+        {
+          "name": "ASP.NET"
+        },
+        {
+          "name": "SQL Server"
+        },
+        {
+          "name": ".NET Core"
+        }
+      ],
+      "mode": "On-site",
+      "location": "Guayaquil, Ecuador"
+    },
+    {
+      "position": "Database Teaching Assistant",
+      "company": "Escuela Superior Politécnica del Litoral - ESPOL",
+      "dateFrom": "05/2019",
+      "dateTo": "10/2019",
+      "achievements": [
+        "Review of workshops and tasks assigned to students.",
+        "Teaching help classes and practical exercises.",
+        "Providing feedback to students."
+      ],
+      "attitudes": [
+        {
+          "name": "MySQL"
+        },
+        {
+          "name": "Teaching"
+        }
+      ],
+      "mode": "On-site",
+      "location": "Guayaquil, Ecuador"
+    },
+    {
+      "position": "Full Stack Developer",
+      "company": "Contifico S.A.",
+      "dateFrom": "06/2020",
+      "dateTo": "09/2020",
+      "achievements": [
+        "Maintenance of a web application, fixing errors and adding new features.",
+        "Management of the MySQL database used by the web application."
+      ],
+      "attitudes": [
+        {
+          "name": "Python"
+        },
+        {
+          "name": "Django"
+        },
+        {
+          "name": "MySQL"
+        },
+        {
+          "name": "Javascript"
+        },
+        {
+          "name": "HTML"
+        }
+      ],
+      "mode": "Remote",
+      "location": "Guayaquil, Ecuador"
+    },
+    {
+      "position": "Sr. Full Stack Developer",
+      "company": "SIIGO S.A.",
+      "dateFrom": "09/2020",
+      "dateTo": "Present",
+      "achievements": [
+        "Implementation of microservices using node.js and C#.",
+        "Intuitive web development using Reactjs.",
+        "Implementation of Kafka consumers and producers in microservices.",
+        "Administration of NoSQL databases using MongoDB.",
+        "Implementation of GraphQL services in Node.js microservices."
+      ],
+      "attitudes": [
+        {
+          "name": "Javascript"
+        },
+        {
+          "name": "Typescript"
+        },
+        {
+          "name": "Reactjs"
+        },
+        {
+          "name": "Nodejs"
+        },
+        {
+          "name": "NestJS"
+        },
+        {
+          "name": "MongoDB"
+        },
+        {
+          "name": "Kafka"
+        },
+        {
+          "name": "Docker"
+        },
+        {
+          "name": "C#"
+        },
+        {
+          "name": ".NET Core"
+        },
+        {
+          "name": "Azure Functions"
+        },
+        {
+          "name": "GraphQL"
+        }
+      ],
+      "mode": "Remote",
+      "location": "Colombia"
+    }
+  ],
+  "skills": {
+    "tech": [
+      {
+        "name": "NestJS"
+      },
+      {
+        "name": "Node.js"
+      },
+      {
+        "name": "Typescript"
+      },
+      {
+        "name": "MongoDB"
+      },
+      {
+        "name": "Docker"
+      },
+      {
+        "name": ".NET Core"
+      },
+      {
+        "name": "Azure Functions"
+      },
+      {
+        "name": "GraphQL"
+      },
+      {
+        "name": "Python"
+      },
+      {
+        "name": "MySQL"
+      },
+      {
+        "name": "PostgreSQL"
+      },
+      {
+        "name": "Kafka"
+      },
+      {
+        "name": "Next.js"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "name": "Aurora",
+      "type": "Web Project",
+      "owner": "Siigo S.A.",
+      "description": "Payment gateway for the company Siigo S.A. that allows users to make payments for their invoices securely and quickly.",
+      "repositoryUrl": "",
+      "companyUrl": "https://siigo.com",
+      "backgroundPicture": "/images/bg_project_aurora.png",
+      "technologies": [
+        {
+          "name": "React.js"
+        },
+        {
+          "name": "NestJs"
+        },
+        {
+          "name": "MongoDB"
+        },
+        {
+          "name": "C#"
+        },
+        {
+          "name": "Azure"
+        }
+      ]
+    }
+  ],
+  "interests": [
+    {
+      "name": "Travel and Photography",
+      "description": "I love to travel and discover new places, as well as capture those moments with my camera or cell phone.",
+      "url": "https://www.instagram.com/d3v.il.923/",
+      "image": "/images/interest_travel_photography.jpg"
+    },
+    {
+      "name": "Pc Gaming",
+      "description": "I like everything related to the gaming world, PC hardware, and technology in general.",
+      "image": "/images/interest_setup_gamer.jpg"
+    }
+  ]
+}
