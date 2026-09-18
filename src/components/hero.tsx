@@ -1,8 +1,11 @@
-import { ArrowUpRight, Download, MapPin, Terminal } from "lucide-react";
+import { ArrowUpRight, MapPin, Terminal } from "lucide-react";
+import { CvDownload } from "./cv-download";
 import { SocialLinks } from "./social-links";
-import type { SectionProps } from "@/types/portfolio";
+import type { Language, SectionProps } from "@/types/portfolio";
 
-export function Hero({ data, text }: Readonly<SectionProps>) {
+type HeroProps = SectionProps & { readonly language: Language };
+
+export function Hero({ data, text, language }: Readonly<HeroProps>) {
   return (
     <section className="hero container" id="home">
       <div className="hero-copy">
@@ -28,14 +31,12 @@ export function Hero({ data, text }: Readonly<SectionProps>) {
             {text.work}
             <ArrowUpRight size={18} />
           </a>
-          <a
-            className="button secondary"
-            href={`/${data.about.urlCurriculum}`}
-            download
-          >
-            {text.cv}
-            <Download size={17} />
-          </a>
+          <CvDownload
+            language={language}
+            label={text.cv}
+            menuLabel={text.cvMenu}
+            otherLabel={text.cvOther}
+          />
         </div>
         <div className="hero-contact">
           <span>{text.contactMe}</span>

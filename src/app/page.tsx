@@ -24,7 +24,7 @@ export default function Portfolio() {
       </a>
       <Header {...preferences} text={text} />
       <main id="main">
-        <Hero data={data} text={text} />
+        <Hero data={data} text={text} language={preferences.language} />
         <About data={data} text={text} />
         <Skills data={data} text={text} />
         <Projects data={data} text={text} />
