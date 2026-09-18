@@ -2,7 +2,9 @@ import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "./section-heading";
 import type { SectionProps } from "@/types/portfolio";
 
-export function Projects({ data, text }: Readonly<SectionProps>) {
+export function Projects({ content }: Readonly<SectionProps>) {
+  const text = content.ui;
+
   return (
     <section id="projects" className="band section">
       <div className="container">
@@ -12,7 +14,7 @@ export function Projects({ data, text }: Readonly<SectionProps>) {
           text={text.projectsText}
         />
         <div className="project-grid">
-          {data.projects.map((p, i) => (
+          {content.projects.map((p, i) => (
             <article className="project-card" key={p.name}>
               <div className="project-image">
                 <img

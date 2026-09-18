@@ -3,19 +3,8 @@ import Image from "next/image";
 import { statisticIcons } from "@/constants/icons";
 import type { SectionProps } from "@/types/portfolio";
 
-export function About({ data, text }: Readonly<SectionProps>) {
-  const paragraphs = data.about.description
-    .split(". ")
-    .reduce<string[]>((parts, sentence, index) => {
-      const paragraphIndex = index < 2 ? 0 : 1;
-      const punctuation = sentence.endsWith(".") ? "" : ".";
-
-      parts[paragraphIndex] = `${parts[paragraphIndex] ?? ""}${
-        parts[paragraphIndex] ? " " : ""
-      }${sentence}${punctuation}`;
-
-      return parts;
-    }, []);
+export function About({ content }: Readonly<SectionProps>) {
+  const text = content.ui;
 
   return (
     <section id="about" className="band">
@@ -26,7 +15,7 @@ export function About({ data, text }: Readonly<SectionProps>) {
 
         <div className="about-content">
           <div className="about-copy">
-            {paragraphs.map((paragraph) => (
+            {content.about.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
@@ -42,13 +31,13 @@ export function About({ data, text }: Readonly<SectionProps>) {
                 <strong>
                   {
                     [
-                      `${String(data.experience.length).padStart(2, "0")}+`,
+                      `${String(content.experience.length).padStart(2, "0")}+`,
                       String(
-                        data.skills.tech.filter((s) => s.name !== "Ingles")
+                        content.skills.tech.filter((s) => s.name !== "Ingles")
                           .length,
                       ),
                       "ESPOL",
-                      String(data.projects.length).padStart(2, "0"),
+                      String(content.projects.length).padStart(2, "0"),
                     ][i]
                   }
                 </strong>
@@ -66,7 +55,7 @@ export function About({ data, text }: Readonly<SectionProps>) {
           </h2>
           <div className="about-photo-frame">
             <Image
-              src={data.about.aboutPicture}
+              src={content.about.aboutPicture}
               alt="Carlos Sesme"
               fill
               sizes="(max-width: 700px) calc(100vw - 40px), 52vw"

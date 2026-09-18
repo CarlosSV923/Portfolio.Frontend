@@ -1,9 +1,9 @@
-import type { PortfolioData } from "@/types/portfolio";
+import type { PortfolioContent } from "@/types/portfolio";
 
 import { GithubIcon, LinkedinIcon, MailIcon } from "./Icons.svg";
 
 type SocialLinksProps = {
-  readonly contact: PortfolioData["contact"];
+  readonly contact: PortfolioContent["contact"];
   readonly emailLabel: string;
   readonly variant?: "icons" | "text";
 };

@@ -7,7 +7,8 @@ import { SectionHeading } from "./section-heading";
 import { TechnologySnake } from "./technology-snake";
 import type { SectionProps } from "@/types/portfolio";
 
-export function Skills({ data, text }: Readonly<SectionProps>) {
+export function Skills({ content }: Readonly<SectionProps>) {
+  const text = content.ui;
   const [isGameActive, setIsGameActive] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -48,7 +49,7 @@ export function Skills({ data, text }: Readonly<SectionProps>) {
           {text.tech}
         </h3>
         <TechnologySnake
-          technologies={data.skills.tech}
+          technologies={content.skills.tech}
           copy={text.snake}
           onActiveChange={setIsGameActive}
         />

@@ -2,7 +2,9 @@ import { BriefcaseBusiness, GraduationCap, ChevronDown } from "lucide-react";
 import { SectionHeading } from "./section-heading";
 import type { SectionProps } from "@/types/portfolio";
 
-export function Journey({ data, text }: Readonly<SectionProps>) {
+export function Journey({ content }: Readonly<SectionProps>) {
+  const text = content.ui;
+
   return (
     <section id="journey" className="container section">
       <SectionHeading eyebrow={text.career} title={text.careerTitle} />
@@ -13,7 +15,7 @@ export function Journey({ data, text }: Readonly<SectionProps>) {
             {text.experience}
           </h3>
           <div className="timeline">
-            {[...data.experience].reverse().map((e, i) => (
+            {[...content.experience].reverse().map((e, i) => (
               <details
                 className="experience-item"
                 key={e.company + e.position}
@@ -55,7 +57,7 @@ export function Journey({ data, text }: Readonly<SectionProps>) {
             {text.education}
           </h3>
           <div className="education-list">
-            {[...data.education].reverse().map((e) => (
+            {[...content.education].reverse().map((e) => (
               <article key={`${e.degree}-${e.institution}`}>
                 <span className="date">
                   {e.dateFrom} — {e.dateTo}

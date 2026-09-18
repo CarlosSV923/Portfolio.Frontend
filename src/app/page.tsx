@@ -1,8 +1,7 @@
 "use client";
-import { labels } from "@/constants/labels";
 import { usePreferences } from "@/hooks/use-preferences";
-import es from "@/data/es.json";
-import en from "@/data/en.json";
+import { es } from "@/data/es";
+import { en } from "@/data/en";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
@@ -15,24 +14,23 @@ import { Contact } from "@/components/contact";
 
 export default function Portfolio() {
   const preferences = usePreferences();
-  const data = preferences.language === "es" ? es : en;
-  const text = labels[preferences.language];
+  const content = preferences.language === "es" ? es : en;
   return (
     <>
       <a className="skip-link" href="#main">
-        {text.skip}
+        {content.ui.skip}
       </a>
-      <Header {...preferences} text={text} />
+      <Header {...preferences} text={content.ui} />
       <main id="main">
-        <Hero data={data} text={text} language={preferences.language} />
-        <About data={data} text={text} />
-        <Skills data={data} text={text} />
-        <Projects data={data} text={text} />
-        <Journey data={data} text={text} />
-        <Interests data={data} text={text} />
-        <Contact data={data} text={text} />
+        <Hero content={content} language={preferences.language} />
+        <About content={content} />
+        <Skills content={content} />
+        <Projects content={content} />
+        <Journey content={content} />
+        <Interests content={content} />
+        <Contact content={content} />
       </main>
-      <Footer text={text} />
+      <Footer text={content.ui} />
     </>
   );
 }

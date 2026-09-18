@@ -5,26 +5,23 @@ import type { Language, SectionProps } from "@/types/portfolio";
 
 type HeroProps = SectionProps & { readonly language: Language };
 
-export function Hero({ data, text, language }: Readonly<HeroProps>) {
+export function Hero({ content, language }: Readonly<HeroProps>) {
+  const text = content.ui;
+
   return (
     <section className="hero container" id="home">
       <div className="hero-copy">
         <span className="eyebrow role-label">
           <span className="status-dot" />
-          {data.general.profession}
+          {content.general.profession}
         </span>
         <h1>
           {text.hello}{" "}
           <span className="accent">
-            {data.general.firstName}
+            {content.general.firstName}
             <span className="name-dot">.</span>
           </span>
         </h1>
-        <h2>
-          {text.headline}
-          <br />
-          {text.highlight}
-        </h2>
         <p className="hero-intro">{text.intro}</p>
         <div className="actions">
           <a className="button primary" href="#projects">
@@ -40,7 +37,7 @@ export function Hero({ data, text, language }: Readonly<HeroProps>) {
         </div>
         <div className="hero-contact">
           <span>{text.contactMe}</span>
-          <SocialLinks contact={data.contact} emailLabel={text.emailLabel} />
+          <SocialLinks contact={content.contact} emailLabel={text.emailLabel} />
         </div>
       </div>
       <div className="hero-visual">
@@ -48,7 +45,7 @@ export function Hero({ data, text, language }: Readonly<HeroProps>) {
         <div className="portrait-orbit" />
         <div className="portrait-frame">
           <img
-            src={data.general.avatarPicture}
+            src={content.general.avatarPicture}
             alt="Carlos Sesme"
             fetchPriority="high"
             width={480}
@@ -57,7 +54,7 @@ export function Hero({ data, text, language }: Readonly<HeroProps>) {
         </div>
         <div className="location-tag">
           <MapPin size={15} />
-          {data.contact.address}
+          {content.contact.address}
         </div>
         <div className="code-card">
           <div className="code-title">

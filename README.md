@@ -8,7 +8,7 @@ A personal portfolio built with Next.js App Router, React, and TypeScript. It sh
 - Light, dark, and system theme options, with matching browser tab icons.
 - Responsive sections for projects, career history, interests, and contact information.
 - Tech-Snake, an optional desktop-only game in the technologies section.
-- Portfolio content stored in local JSON files; no backend or environment variables are required to run the site locally.
+- Portfolio content and interface text stored in two TypeScript files; no backend or environment variables are required to run the site locally.
 
 ## Run locally
 
@@ -40,13 +40,13 @@ Other available commands:
 
 - `src/app/`: App Router entry point, metadata, and global styles.
 - `src/components/`: Page sections, shared UI, and Tech-Snake components.
-- `src/constants/`: Interface labels, navigation, technology icons, and preferences.
-- `src/data/en.json` and `src/data/es.json`: Portfolio content in both languages.
+- `src/constants/`: Navigation, technology icons, and preferences.
+- `src/data/en.ts` and `src/data/es.ts`: Portfolio content and interface text for each language.
 - `src/hooks/` and `src/types/`: Preference state and shared types.
 - `public/images/` and `public/icons/`: Images and icons used by the site.
-- `public/files/cv.pdf`: Downloadable résumé.
+- `public/files/`: English and Spanish downloadable résumés.
 
-Update both JSON files when changing portfolio content. Interface copy, including the game instructions, lives in `src/constants/labels.ts`. The contact links open an email client or external profiles; there is no contact form or server-side email service.
+Edit `src/data/en.ts` and `src/data/es.ts` when changing portfolio content or interface text. Each file exposes one object: `ui` contains labels and game instructions; the other fields contain the page content. The contact links open an email client or external profiles; there is no contact form or server-side email service.
 
 ## Deployment and releases
 
