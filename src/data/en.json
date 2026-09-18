@@ -40,30 +40,6 @@
   ],
   "experience": [
     {
-      "position": "Computer Laboratory Assistant",
-      "company": "Escuela Superior Politécnica del Litoral - ESPOL",
-      "dateFrom": "05/2018",
-      "dateTo": "10/2018",
-      "achievements": [
-        "Assisted in the administration of computer laboratories.",
-        "Performed basic maintenance of computer equipment.",
-        "Supervised access to institutional technological resources."
-      ],
-      "attitudes": [
-        {
-          "name": "Computer Maintenance"
-        },
-        {
-          "name": "Maintenance and Repairs"
-        },
-        {
-          "name": "Hardware"
-        }
-      ],
-      "mode": "On-site",
-      "location": "Guayaquil, Ecuador"
-    },
-    {
       "position": "Software Development Intern",
       "company": "BlackBoxEc",
       "dateFrom": "06/2019",

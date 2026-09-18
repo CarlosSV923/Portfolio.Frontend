@@ -40,30 +40,6 @@
   ],
   "experience": [
     {
-      "position": "Ayudante de Laboratorio de Computación",
-      "company": "Escuela Superior Politécnica del Litoral - ESPOL",
-      "dateFrom": "05/2018",
-      "dateTo": "10/2018",
-      "achievements": [
-        "Ayuda en la administración de laboratorios de computación.",
-        "Realización el mantenimiento básico de los equipos computacionales.",
-        "Supervisión el acceso a los recursos tecnológicos de la institución."
-      ],
-      "attitudes": [
-        {
-          "name": "Mantenimiento informático"
-        },
-        {
-          "name": "Mantenimiento y reparaciones"
-        },
-        {
-          "name": "Hardware"
-        }
-      ],
-      "mode": "Presencial",
-      "location": "Guayaquil, Ecuador"
-    },
-    {
       "position": "Pasante de Desarrollo de Software",
       "company": "BlackBoxEc",
       "dateFrom": "06/2019",
