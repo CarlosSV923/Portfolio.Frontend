@@ -443,12 +443,6 @@ img {
   letter-spacing: -2.5px;
   margin-bottom: 13px;
 }
-.hero h2 {
-  font-size: clamp(25px, 2.4vw, 33px);
-  font-weight: 700;
-  letter-spacing: -1.1px;
-  line-height: 1.35;
-}
 .name-dot {
   color: var(--ink);
 }
@@ -565,7 +559,6 @@ img {
   width: 44px;
   height: 44px;
 }
-
 .tech-icon {
   width: 26px;
   height: 26px;
@@ -1697,9 +1690,6 @@ img {
   .hero h1 {
     font-size: 43px;
   }
-  .hero h2 {
-    font-size: 27px;
-  }
   .hero-visual {
     transform: scale(0.9);
     transform-origin: center right;
@@ -1764,9 +1754,6 @@ img {
   .hero h1 {
     font-size: 38px;
     letter-spacing: -1.5px;
-  }
-  .hero h2 {
-    font-size: 25px;
   }
   .about-grid {
     gap: 30px;
@@ -1850,9 +1837,6 @@ img {
   }
   .hero h1 {
     font-size: 46px;
-  }
-  .hero h2 {
-    font-size: 28px;
   }
   .hero-intro {
     max-width: 480px;

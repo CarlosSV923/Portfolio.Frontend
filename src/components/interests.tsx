@@ -3,7 +3,9 @@ import { FloatingCode } from "./floating-code";
 import { SectionHeading } from "./section-heading";
 import type { SectionProps } from "@/types/portfolio";
 
-export function Interests({ data, text }: Readonly<SectionProps>) {
+export function Interests({ content }: Readonly<SectionProps>) {
+  const text = content.ui;
+
   return (
     <section className="band section interests-section">
       <FloatingCode
@@ -13,7 +15,7 @@ export function Interests({ data, text }: Readonly<SectionProps>) {
       <div className="container">
         <SectionHeading eyebrow={text.interests} title={text.interestsTitle} />
         <div className="interest-grid">
-          {data.interests.map((item) => (
+          {content.interests.map((item) => (
             <article className="interest-card" key={item.name}>
               <img
                 src={item.image}
