@@ -1,16 +1,69 @@
-import { ArrowUpRight, MapPin, Terminal } from "lucide-react";
+"use client";
+
+import { ArrowUpRight, Gamepad2, MapPin, Terminal } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { CvDownload } from "./cv-download";
+import { SpaceshipBackground } from "./spaceship-background";
 import { SocialLinks } from "./social-links";
+import { TechSpace } from "./tech-space/tech-space";
 import type { Language, SectionProps } from "@/types/portfolio";
 
 type HeroProps = SectionProps & { readonly language: Language };
 
 export function Hero({ content, language }: Readonly<HeroProps>) {
   const text = content.ui;
+  const [isOpening, setIsOpening] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const openingTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (openingTimer.current) window.clearTimeout(openingTimer.current);
+    };
+  }, []);
+
+  const openGame = () => {
+    if (isOpening || !window.matchMedia("(min-width: 900px)").matches) {
+      return;
+    }
+    setIsOpening(true);
+    openingTimer.current = window.setTimeout(
+      () => {
+        setIsPlaying(true);
+        openingTimer.current = null;
+      },
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 440,
+    );
+  };
+
+  const closeGame = () => {
+    setIsPlaying(false);
+    setIsOpening(false);
+  };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 900px)");
+    const closeOnSmallScreen = () => {
+      if (!mediaQuery.matches) {
+        if (openingTimer.current) window.clearTimeout(openingTimer.current);
+        openingTimer.current = null;
+        setIsPlaying(false);
+        setIsOpening(false);
+      }
+    };
+
+    closeOnSmallScreen();
+    mediaQuery.addEventListener("change", closeOnSmallScreen);
+    return () => mediaQuery.removeEventListener("change", closeOnSmallScreen);
+  }, []);
 
   return (
-    <section className="hero container" id="home">
-      <div className="hero-copy">
+    <section
+      className={`hero container${isOpening ? " is-opening" : ""}${isPlaying ? " is-playing" : ""}`}
+      id="home"
+    >
+      <SpaceshipBackground paused={isOpening} />
+      <div className="hero-copy" aria-hidden={isOpening} inert={isOpening}>
         <span className="eyebrow role-label">
           <span className="status-dot" />
           {content.general.profession}
@@ -39,8 +92,20 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
           <span>{text.contactMe}</span>
           <SocialLinks contact={content.contact} emailLabel={text.emailLabel} />
         </div>
+        <div className="hero-play">
+          <p className="hero-play-prompt">{text.heroPlayPrompt}</p>
+          <button
+            className="snake-button hero-play-button"
+            type="button"
+            onClick={openGame}
+          >
+            <Gamepad2 size={18} />
+            {text.space.play}
+          </button>
+          <p className="hero-play-mobile">{text.space.mobileIntro}</p>
+        </div>
       </div>
-      <div className="hero-visual">
+      <div className="hero-visual" aria-hidden={isOpening} inert={isOpening}>
         <div className="dot-field" />
         <div className="portrait-orbit" />
         <div className="portrait-frame">
@@ -90,6 +155,13 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
         </div>
         <span className="visual-caption">&lt; building with purpose /&gt;</span>
       </div>
+      {isPlaying && (
+        <TechSpace
+          technologies={content.skills.tech}
+          copy={text.space}
+          onExit={closeGame}
+        />
+      )}
     </section>
   );
 }

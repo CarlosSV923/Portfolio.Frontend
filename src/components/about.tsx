@@ -3,6 +3,8 @@ import Image from "next/image";
 import { statisticIcons } from "@/constants/icons";
 import type { SectionProps } from "@/types/portfolio";
 
+const yearsOfExperience = "05+";
+
 export function About({ content }: Readonly<SectionProps>) {
   const text = content.ui;
 
@@ -31,7 +33,7 @@ export function About({ content }: Readonly<SectionProps>) {
                 <strong>
                   {
                     [
-                      `${String(content.experience.length).padStart(2, "0")}+`,
+                      yearsOfExperience,
                       String(
                         content.skills.tech.filter((s) => s.name !== "Ingles")
                           .length,
@@ -49,9 +51,8 @@ export function About({ content }: Readonly<SectionProps>) {
 
         <div className="about-media">
           <h2>
-            {text.aboutTitle}
-            <br />
-            <span className="muted">{text.aboutAccent}</span>
+            {text.aboutTitle}{" "}
+            <span className="muted">— {text.aboutAccent}</span>
           </h2>
           <div className="about-photo-frame">
             <Image
