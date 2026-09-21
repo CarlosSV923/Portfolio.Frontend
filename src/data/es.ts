@@ -9,6 +9,7 @@ export const es = {
       "Contacto",
     ],
     hello: "Hola, soy",
+    heroExperience: "5+ años de experiencia",
     intro:
       "Desarrollador Full Stack con más de 5 años de experiencia creando aplicaciones web utilizando tecnologías como NestJS, .NET, React, MongoDB y Apache Kafka.",
     heroCodeHint: "Toca los </>",
@@ -140,6 +141,7 @@ export const es = {
   },
   general: {
     firstName: "Carlos",
+    lastName: "Sesme",
     avatarPicture: "/images/avatar_picture.jpg",
     profession: "Desarrollador Full Stack",
   },

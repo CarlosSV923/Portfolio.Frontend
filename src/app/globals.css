@@ -744,17 +744,6 @@ img {
     transform: translate3d(14px, -20px, 0) rotate(6deg);
   }
 }
-.role-label {
-  font-size: 10px;
-  letter-spacing: 1.3px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent-soft);
-  padding: 5px 10px;
-  border-radius: 3px;
-  margin-bottom: 21px;
-}
 .status-dot {
   display: inline-block;
   width: 6px;
@@ -766,16 +755,69 @@ img {
   font-size: clamp(38px, 4.1vw, 58px);
   font-weight: 800;
   letter-spacing: -2.5px;
-  margin-bottom: 13px;
 }
-.name-dot {
+.hero-greeting,
+.hero-role,
+.hero-experience {
+  font-family: "Manrope", sans-serif;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hero-greeting {
+  margin-bottom: 6px;
+  color: var(--secondary);
+  font-size: 10px;
+}
+.hero-name {
   color: var(--ink);
+  text-transform: uppercase;
+}
+.hero-role {
+  margin-top: 2px;
+  color: var(--accent);
+  font-size: clamp(18px, 1.8vw, 25px);
+  line-height: 1.35;
+}
+.hero-experience {
+  margin-top: 3px;
+  color: var(--ink);
+  font-size: clamp(12px, 1vw, 15px);
+  line-height: 1.45;
 }
 .hero-intro {
   font-size: 15px;
   max-width: 415px;
   line-height: 1.8;
-  margin-top: 22px;
+  margin-top: 20px;
+}
+.hero-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  padding: 0;
+  margin: 18px 0 0;
+  list-style: none;
+}
+.hero-technologies li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--secondary);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1;
+}
+.hero-technologies .tech-icon,
+.hero-technologies .tech-monogram,
+.hero-react-icon {
+  width: 21px;
+  height: 21px;
+}
+.hero-react-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+  stroke-width: 1.8;
 }
 .actions {
   display: flex;

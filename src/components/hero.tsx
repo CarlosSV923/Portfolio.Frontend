@@ -64,17 +64,12 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
     >
       <SpaceshipBackground paused={isOpening} />
       <div className="hero-copy" aria-hidden={isOpening} inert={isOpening}>
-        <span className="eyebrow role-label">
-          <span className="status-dot" />
-          {content.general.profession}
-        </span>
-        <h1>
-          {text.hello}{" "}
-          <span className="accent">
-            {content.general.firstName}
-            <span className="name-dot">.</span>
-          </span>
+        <p className="hero-greeting">{text.hello}</p>
+        <h1 className="hero-name">
+          {content.general.firstName} {content.general.lastName}
         </h1>
+        <p className="hero-role">{content.general.profession}</p>
+        <p className="hero-experience">{text.heroExperience}</p>
         <p className="hero-intro">{text.intro}</p>
         <div className="actions">
           <a className="button primary" href="#projects">
@@ -124,32 +119,31 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
         <div className="code-card">
           <div className="code-title">
             <span>
-              <Terminal size={13} /> developer.ts
+              <Terminal size={13} /> carlos-sesme.ts
             </span>
             <span className="status-dot" />
           </div>
           <pre>
             <span className="code-key">const</span>
             {" developer = {\n"}
-            {"  name: "}
-            <span className="code-string">'Carlos Sesme'</span>
-            {",\n  roles: ["}
-            <span className="code-string">'Full Stack'</span>
-            {", "}
-            <span className="code-string">'Back-End'</span>
-            {"]"}
-            {",\n  stack: ["}
+            {"  stack: ["}
             <span className="code-string">'NestJS'</span>
             {",\n          "}
-            <span className="code-string">'Node.js'</span>
-            {", "}
-            <span className="code-string">'C#'</span>
+            <span className="code-string">'Apache Kafka'</span>
+            {",\n          "}
+            <span className="code-string">'.Net'</span>
             {"],\n  mindset: ["}
-            <span className="code-string">'Always learning'</span>
+            <span className="code-string">'Learn'</span>
+            {",\n            "}
+            <span className="code-string">'Build'</span>
+            {",\n            "}
+            <span className="code-string">'Improve'</span>
+            {",\n            "}
+            <span className="code-string">'Coffee'</span>
             {",\n            "}
             <span className="code-string">'Play Video Games'</span>
             {",\n            "}
-            <span className="code-string">'Coffee'</span>
+            <span className="code-string">'Repeat'</span>
             {"]\n};"}
           </pre>
         </div>
