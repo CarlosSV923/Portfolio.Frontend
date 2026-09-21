@@ -2,6 +2,7 @@ export const en = {
   ui: {
     nav: ["Home", "About", "Skills", "Projects", "Journey", "Contact"],
     hello: "Hi, I’m",
+    heroExperience: "5+ years of experience",
     intro:
       "Full Stack Developer with 5+ years of experience building web applications using technologies such as NestJS, .NET, React, MongoDB, and Apache Kafka.",
     heroCodeHint: "Tap the </> symbols",
@@ -130,6 +131,7 @@ export const en = {
   },
   general: {
     firstName: "Carlos",
+    lastName: "Sesme",
     avatarPicture: "/images/avatar_picture.jpg",
     profession: "Full Stack Developer",
   },
