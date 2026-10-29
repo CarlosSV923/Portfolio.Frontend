@@ -1,9 +1,9 @@
-import type { es } from "@/data/es";
-import type { en } from "@/data/en";
-import type { languages, themes } from "@/constants/preferences";
+import type { PortfolioContent } from "@/content/types";
+import type { themes } from "@/lib/theme";
 
-export type Language = (typeof languages)[number];
+export type { Language } from "@/i18n/config";
+export type { PortfolioContent } from "@/content/types";
+
 export type Theme = (typeof themes)[number];
-export type PortfolioContent = typeof es | typeof en;
 export type PortfolioText = PortfolioContent["ui"];
 export type SectionProps = { readonly content: PortfolioContent };

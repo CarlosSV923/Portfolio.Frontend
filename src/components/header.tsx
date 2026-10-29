@@ -1,26 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Code2, Menu, X } from "lucide-react";
 import { ids, sectionObserverOptions } from "@/constants/navigation";
-import { languages, themes } from "@/constants/preferences";
 import { themeIcons } from "@/constants/icons";
-import type { Language, Theme, PortfolioText } from "@/types/portfolio";
+import { useTheme } from "@/hooks/use-theme";
+import { languageCookie, languages } from "@/i18n/config";
+import { themes } from "@/lib/theme";
+import type { Language, PortfolioText } from "@/types/portfolio";
 type HeaderProps = {
   readonly language: Language;
-  readonly theme: Theme;
   readonly text: PortfolioText;
-  readonly setLanguage: (language: Language) => void;
-  readonly setTheme: (theme: Theme) => void;
 };
-export function Header({
-  language,
-  theme,
-  text,
-  setLanguage,
-  setTheme,
-}: HeaderProps) {
+
+function rememberLanguage(language: Language) {
+  document.cookie = `${languageCookie}=${language}; path=/; max-age=31536000; SameSite=Lax`;
+}
+
+export function Header({ language, text }: HeaderProps) {
   const [menu, setMenu] = useState(false);
   const [active, setActive] = useState("home");
+  const { theme, setTheme } = useTheme();
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -45,7 +45,11 @@ export function Header({
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <a href="#home" className="brand" aria-label="Carlos Sesme — Home">
+        <a
+          href="#home"
+          className="brand"
+          aria-label={`Carlos Sesme — ${text.nav[0]}`}
+        >
           <Code2 />
           <span>
             carlos<span className="accent">.</span>sesme
@@ -54,9 +58,7 @@ export function Header({
         <nav
           id="navigation"
           className={menu ? "navigation open" : "navigation"}
-          aria-label={
-            language === "es" ? "Navegación principal" : "Main navigation"
-          }
+          aria-label={text.navLabel}
         >
           {ids.map((id, i) => (
             <a
@@ -76,14 +78,16 @@ export function Header({
             aria-label={text.language}
           >
             {languages.map((l) => (
-              <button
+              <Link
                 key={l}
-                onClick={() => setLanguage(l)}
-                aria-pressed={language === l}
+                href={`/${l}`}
+                hrefLang={l}
                 lang={l}
+                aria-current={language === l ? "page" : undefined}
+                onClick={() => rememberLanguage(l)}
               >
                 {l.toUpperCase()}
-              </button>
+              </Link>
             ))}
           </div>
           <div className="theme-switch" role="group" aria-label={text.theme}>

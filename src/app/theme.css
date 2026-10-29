@@ -1,0 +1,100 @@
+/*
+ * Design tokens. One blue brand in both themes; every color in the app reads
+ * from these variables. Names follow shadcn/ui so its components work as-is.
+ */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  color-scheme: light;
+  --background: #fbfcff;
+  --foreground: #172033;
+  --card: #ffffff;
+  --card-foreground: #172033;
+  --popover: #ffffff;
+  --popover-foreground: #172033;
+  --primary: #2f5bd3;
+  --primary-foreground: #ffffff;
+  --primary-bright: #4a74ee;
+  --primary-soft: #e7edfd;
+  --secondary: #f2f5fb;
+  --secondary-foreground: #172033;
+  --muted: #f2f5fb;
+  --muted-foreground: #4f596c;
+  --subtle-foreground: #5e687a;
+  --accent: #e7edfd;
+  --accent-foreground: #1e3d99;
+  --destructive: #c62f3a;
+  --success: #2f7d55;
+  --border: rgb(23 40 80 / 12%);
+  --input: rgb(23 40 80 / 16%);
+  --ring: #2f5bd3;
+  --control: #edf1f8;
+  --orbit: #6f93f5;
+  --code-bg: #f7f9ff;
+  --code-string: #9a4b1c;
+  --radius: 0.75rem;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #050b16;
+  --foreground: #f3f5fa;
+  --card: #0c1425;
+  --card-foreground: #f3f5fa;
+  --popover: #0c1425;
+  --popover-foreground: #f3f5fa;
+  --primary: #779dff;
+  --primary-foreground: #ffffff;
+  --primary-bright: #376df4;
+  --primary-soft: #14254a;
+  --secondary: #090f1f;
+  --secondary-foreground: #f3f5fa;
+  --muted: #090f1f;
+  --muted-foreground: #a5adbf;
+  --subtle-foreground: #8d98af;
+  --accent: #14254a;
+  --accent-foreground: #c9d7ff;
+  --destructive: #f2777f;
+  --success: #74d9a0;
+  --border: rgb(173 191 230 / 13%);
+  --input: rgb(173 191 230 / 18%);
+  --ring: #779dff;
+  --control: #101a2c;
+  --orbit: #2553c9;
+  --code-bg: #0a1120;
+  --code-string: #e1b18d;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), sans-serif;
+  --font-heading: var(--font-manrope), sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-bright: var(--primary-bright);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-control: var(--control);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
