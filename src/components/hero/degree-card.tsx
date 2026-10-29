@@ -14,12 +14,10 @@ export function DegreeCard({
         {label}
       </Eyebrow>
       <div>
-        <p className="font-heading text-lg leading-snug font-bold">
+        <p className="font-heading text-xl leading-snug font-bold sm:text-2xl">
           {education.degree}
         </p>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {education.institution}
-        </p>
+        <p className="mt-2 text-muted-foreground">{education.institution}</p>
       </div>
       <div className="mt-auto space-y-1 text-sm">
         <p className="font-medium text-primary">

@@ -173,8 +173,9 @@ export function Journey({ content }: Readonly<SectionProps>) {
           }
         />
         {/* The viewport covers the first slide's gutter so no sliver of the
-            previous card shows at the end. */}
-        <CarouselContent viewportClassName="-ml-4" className="ml-0">
+            previous card shows at the end, and gets top room so the pulsing
+            dot is not clipped. */}
+        <CarouselContent viewportClassName="-mt-2 -ml-4 pt-2" className="ml-0">
           {jobs.map((job, i) => (
             <CarouselItem
               key={`${job.company}-${job.dateFrom}`}
