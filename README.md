@@ -4,10 +4,10 @@ A personal portfolio built with Next.js App Router, React, and TypeScript. It sh
 
 ## Features
 
-- English and Spanish content, with the selected language saved in the browser.
+- Statically rendered Spanish (`/es`) and English (`/en`) pages, each with its own title, description, and `hreflang` links. Visiting `/` redirects to the last language chosen, or to the browser's preferred language.
 - Light, dark, and system theme options, with matching browser tab icons.
 - Responsive sections for projects, career history, interests, and contact information.
-- Tech-Snake, an optional desktop-only game in the technologies section.
+- Tech-Snake and Tech-Space, optional desktop-only games in the technologies and hero sections.
 - Portfolio content and interface text stored in two TypeScript files; no backend or environment variables are required to run the site locally.
 
 ## Run locally
@@ -19,7 +19,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The site starts in Spanish and uses the system theme until you choose another option.
+Open [http://localhost:3000](http://localhost:3000). It redirects to `/es` or `/en` and uses the system theme until you choose another option.
 
 To check the production build locally:
 
@@ -30,28 +30,34 @@ pnpm start
 
 Other available commands:
 
-| Command             | Purpose                              |
-| ------------------- | ------------------------------------ |
-| `pnpm lint`         | Lint the project with ESLint.        |
-| `pnpm typecheck`    | Check TypeScript types.              |
-| `pnpm test`         | Run the unit tests once with Vitest. |
-| `pnpm test:watch`   | Run the unit tests in watch mode.    |
-| `pnpm format:check` | Check formatting with Prettier.      |
-| `pnpm format`       | Format the project with Prettier.    |
+| Command             | Purpose                               |
+| ------------------- | ------------------------------------- |
+| `pnpm lint`         | Lint the project with ESLint.         |
+| `pnpm typecheck`    | Generate route types and check types. |
+| `pnpm test`         | Run the unit tests once with Vitest.  |
+| `pnpm test:watch`   | Run the unit tests in watch mode.     |
+| `pnpm format:check` | Check formatting with Prettier.       |
+| `pnpm format`       | Format the project with Prettier.     |
 
-Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic in `src/components/tech-snake/game.ts` and `src/components/tech-space/game.ts`.
+Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic in `src/components/tech-snake/game.ts` and `src/components/tech-space/game.ts`, and language matching in `src/i18n/config.ts`.
 
 ## Project structure
 
-- `src/app/`: App Router entry point, metadata, and global styles.
-- `src/components/`: Page sections, shared UI, and Tech-Snake components.
-- `src/constants/`: Navigation, technology icons, and preferences.
-- `src/data/en.ts` and `src/data/es.ts`: Portfolio content and interface text for each language.
-- `src/hooks/` and `src/types/`: Preference state and shared types.
+- `src/app/[lang]/`: Root layout and page for each language, with metadata and static generation.
+- `src/app/theme.css`: Design tokens (colors, radii, fonts) for both themes, exposed to Tailwind.
+- `src/app/globals.css`: Section styles, to be replaced by Tailwind classes in the redesign.
+- `src/proxy.ts`: Redirects `/` to a language.
+- `src/components/`: Page sections, shared UI, and the Tech-Snake and Tech-Space games.
+- `src/content/`: Portfolio content and interface text (`es.ts`, `en.ts`) and their types.
+- `src/i18n/`: Supported languages and Accept-Language matching.
+- `src/lib/`: Theme store, site URL, and the `cn` class helper.
+- `src/constants/`, `src/hooks/` and `src/types/`: Navigation, icons, the theme hook, and shared types.
 - `public/images/` and `public/icons/`: Images and icons used by the site.
 - `public/files/`: English and Spanish downloadable résumés.
 
-Edit `src/data/en.ts` and `src/data/es.ts` when changing portfolio content or interface text. Each file exposes one object: `ui` contains labels and game instructions; the other fields contain the page content. The contact links open an email client or external profiles; there is no contact form or server-side email service.
+Edit `src/content/es.ts` and `src/content/en.ts` when changing portfolio content or interface text. Each file exposes one object: `ui` contains labels and game instructions; the other fields contain the page content. Spanish is the reference: TypeScript rejects the English file if a key is missing or extra. The contact links open an email client or external profiles; there is no contact form or server-side email service.
+
+Styling uses Tailwind CSS v4 with [shadcn/ui](https://ui.shadcn.com) conventions (`components.json`). Add components with `pnpm dlx shadcn@latest add <component>`; they land in `src/components/ui/`.
 
 ## Continuous integration
 

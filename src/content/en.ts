@@ -1,5 +1,11 @@
-export const en = {
+import type { PortfolioContent } from "./types";
+
+export const en: PortfolioContent = {
   ui: {
+    metaTitle: "Carlos Sesme | Full Stack Developer",
+    metaDescription:
+      "Portfolio of Carlos Sesme, a Full Stack Developer based in Guayaquil, Ecuador. Projects, experience, and technologies.",
+    navLabel: "Main navigation",
     nav: ["Home", "About", "Skills", "Projects", "Journey", "Contact"],
     hello: "Hi, I’m",
     heroExperience: "5+ years of experience",

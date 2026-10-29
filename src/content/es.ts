@@ -1,5 +1,11 @@
+import type { Profile } from "./types";
+
 export const es = {
   ui: {
+    metaTitle: "Carlos Sesme | Desarrollador Full Stack",
+    metaDescription:
+      "Portfolio de Carlos Sesme, desarrollador Full Stack en Guayaquil, Ecuador. Proyectos, experiencia y tecnologías.",
+    navLabel: "Navegación principal",
     nav: [
       "Inicio",
       "Sobre mí",
@@ -403,4 +409,4 @@ export const es = {
       image: "/images/interest_setup_gamer.jpg",
     },
   ],
-};
+} satisfies Profile & { readonly ui: object };
