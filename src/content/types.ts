@@ -74,7 +74,8 @@ export type Profile = {
   readonly general: General;
   readonly contact: Contact;
   readonly about: About;
-  readonly education: readonly Education[];
+  /** Highest degree, shown as a card in the hero. */
+  readonly education: Education;
   readonly experience: readonly Experience[];
   readonly skills: { readonly groups: readonly TechnologyGroup[] };
   readonly projects: readonly Project[];

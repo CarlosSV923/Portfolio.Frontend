@@ -50,7 +50,7 @@ Unit tests live next to the code they cover as `*.test.ts` files. They cover the
 - `src/proxy.ts`: Redirects `/` to a language.
 - `src/components/sections/`: One component per page section (hero, about, skills, projects, journey, interests, contact).
 - `src/components/layout/`: Header and footer.
-- `src/components/hero/`: Hero cards (code card, CV download, spaceship, floating code symbols).
+- `src/components/hero/`: Hero cards (code card, CV download, spaceship).
 - `src/components/ui/`: shadcn/ui components plus the shared `BentoGrid`, `BentoCard`, `Section` and `SectionHeading`.
 - `src/components/tech-snake/`, `src/components/tech-space/`: The games.
 - `src/content/`: Portfolio content and interface text (`es.ts`, `en.ts`) and their types.

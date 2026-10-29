@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { CodeCard } from "@/components/hero/code-card";
 import { CvDownload } from "@/components/hero/cv-download";
-import { FloatingCode } from "@/components/hero/floating-code";
+import { DegreeCard } from "@/components/hero/degree-card";
 import { SpaceshipBackground } from "@/components/hero/spaceship-background";
 import { SocialLinks } from "@/components/social-links";
 import { TechSpace } from "@/components/tech-space/tech-space";
@@ -139,11 +139,15 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
           </p>
         </BentoCard>
 
-        <BentoCard className="md:col-span-6 lg:col-span-4">
+        <BentoCard className="md:col-span-3 lg:col-span-3">
           <CodeCard />
         </BentoCard>
 
-        <BentoCard className="flex min-h-56 flex-col justify-between gap-4 md:col-span-3 lg:col-span-5">
+        <BentoCard className="md:col-span-3 lg:col-span-5">
+          <DegreeCard education={content.education} label={text.education} />
+        </BentoCard>
+
+        <BentoCard className="flex min-h-64 flex-col justify-between gap-4 md:col-span-6 lg:col-span-4">
           <SpaceshipBackground paused={isOpening} />
           <div className="relative">
             <Eyebrow className="flex items-center gap-2">
@@ -166,14 +170,6 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
               {text.space.mobileIntro}
             </p>
           </div>
-        </BentoCard>
-
-        <BentoCard className="min-h-56 md:col-span-3 lg:col-span-3">
-          <Eyebrow className="relative">{text.heroCodeTitle}</Eyebrow>
-          <FloatingCode
-            hint={text.heroCodeHint}
-            actionLabel={text.heroCodeAction}
-          />
         </BentoCard>
       </BentoGrid>
     </section>

@@ -23,9 +23,16 @@ export function About({ content }: Readonly<SectionProps>) {
       <BentoGrid>
         <BentoCard className="md:col-span-6 lg:col-span-7 lg:p-10">
           <Eyebrow>{text.about}</Eyebrow>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            {text.aboutTitle}
-          </h2>
+          <figure className="mt-3">
+            <blockquote>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                {text.aboutTitle}
+              </h2>
+            </blockquote>
+            <figcaption className="mt-3 font-medium text-subtle-foreground">
+              — {text.aboutAuthor}
+            </figcaption>
+          </figure>
           <div className="mt-6 space-y-4 text-muted-foreground">
             {content.about.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
