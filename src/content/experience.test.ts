@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { en } from "./en";
 import { es } from "./es";
-import { buildTimeline, dateValue, isOngoing } from "./timeline";
+import { dateValue, isOngoing, sortExperience } from "./experience";
 
 describe("dateValue", () => {
   it("orders months within a year", () => {
@@ -20,25 +20,27 @@ describe("dateValue", () => {
   });
 });
 
-describe("buildTimeline", () => {
-  it("puts the current job first and keeps every item", () => {
+describe("sortExperience", () => {
+  it("puts the current job first and keeps every job", () => {
     for (const content of [es, en]) {
-      const timeline = buildTimeline(content);
-      expect(timeline).toHaveLength(
-        content.experience.length + content.education.length,
-      );
-      expect(isOngoing(timeline[0])).toBe(true);
+      const jobs = sortExperience(content.experience);
+      expect(jobs).toHaveLength(content.experience.length);
+      expect(isOngoing(jobs[0])).toBe(true);
     }
   });
 
   it("sorts by end date, newest first", () => {
-    const ends = buildTimeline(es).map((item) => dateValue(item.dateTo));
+    const ends = sortExperience(es.experience).map((job) =>
+      dateValue(job.dateTo),
+    );
     expect(ends).toEqual([...ends].sort((a, b) => b - a));
   });
 
   it("orders both languages the same way", () => {
-    const kinds = (items: ReturnType<typeof buildTimeline>) =>
-      items.map((item) => `${item.kind}:${item.dateFrom}`);
-    expect(kinds(buildTimeline(en))).toEqual(kinds(buildTimeline(es)));
+    const starts = (jobs: ReturnType<typeof sortExperience>) =>
+      jobs.map((job) => job.dateFrom);
+    expect(starts(sortExperience(en.experience))).toEqual(
+      starts(sortExperience(es.experience)),
+    );
   });
 });

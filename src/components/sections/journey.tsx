@@ -1,9 +1,4 @@
-import {
-  ArrowUpRight,
-  BriefcaseBusiness,
-  GraduationCap,
-  MapPin,
-} from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, MapPin } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { BentoCard } from "@/components/ui/bento";
@@ -24,22 +19,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Section, SectionHeading } from "@/components/ui/section";
-import {
-  buildTimeline,
-  isOngoing,
-  type TimelineItem,
-} from "@/content/timeline";
+import { isOngoing, sortExperience } from "@/content/experience";
 import type { Experience } from "@/content/types";
 import { cn } from "@/lib/utils";
 import type { PortfolioText, SectionProps } from "@/types/portfolio";
 
 const visibleTechnologies = 3;
 
-type ItemProps = Readonly<{ item: TimelineItem; text: PortfolioText }>;
-
-function dates(item: TimelineItem) {
-  return `${item.dateFrom} — ${item.dateTo}`;
-}
+type JobProps = Readonly<{ job: Experience; text: PortfolioText }>;
 
 function TechnologyBadges({
   technologies,
@@ -64,10 +51,7 @@ function TechnologyBadges({
   );
 }
 
-function ExperienceDetails({
-  job,
-  text,
-}: Readonly<{ job: Experience; text: PortfolioText }>) {
+function ExperienceDetails({ job, text }: JobProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -106,52 +90,38 @@ function ExperienceDetails({
   );
 }
 
-function TimelineCard({ item, text }: ItemProps) {
-  const isWork = item.kind === "work";
-  const Icon = isWork ? BriefcaseBusiness : GraduationCap;
-
+function ExperienceCard({ job, text }: JobProps) {
   return (
     <BentoCard className="flex flex-1 flex-col gap-4 p-6 sm:p-6">
       <div className="flex items-center justify-between gap-3">
-        <span className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-          <span className="grid size-9 place-items-center rounded-xl bg-primary-soft text-primary">
-            <Icon className="size-4.5" />
+        <span className="flex items-center gap-2 text-sm font-medium text-primary">
+          <span className="grid size-9 place-items-center rounded-xl bg-primary-soft">
+            <BriefcaseBusiness className="size-4.5" />
           </span>
-          {isWork ? text.experience : text.education}
+          {job.dateFrom} — {job.dateTo}
         </span>
-        {isOngoing(item) && <Badge>{text.current}</Badge>}
+        {isOngoing(job) && <Badge>{text.current}</Badge>}
       </div>
 
       <div>
-        <p className="text-sm font-medium text-primary">{dates(item)}</p>
-        <h3 className="mt-1 text-lg leading-snug font-bold">
-          {isWork ? item.position : item.degree}
-        </h3>
-        <p className="text-sm text-muted-foreground">
-          {isWork ? item.company : item.institution}
-        </p>
+        <h3 className="text-lg leading-snug font-bold">{job.position}</h3>
+        <p className="text-sm text-muted-foreground">{job.company}</p>
       </div>
 
-      {isWork && (
-        <p className="line-clamp-3 text-sm text-muted-foreground">
-          {item.achievements[0]}
-        </p>
-      )}
+      <p className="line-clamp-3 text-sm text-muted-foreground">
+        {job.achievements[0]}
+      </p>
 
       <div className="mt-auto space-y-4">
         <p className="flex items-center gap-1.5 text-sm text-subtle-foreground">
           <MapPin className="size-3.5 shrink-0" />
-          {isWork ? `${item.location} · ${item.mode}` : item.location}
+          {job.location} · {job.mode}
         </p>
-        {isWork && (
-          <>
-            <TechnologyBadges
-              technologies={item.attitudes}
-              limit={visibleTechnologies}
-            />
-            <ExperienceDetails job={item} text={text} />
-          </>
-        )}
+        <TechnologyBadges
+          technologies={job.attitudes}
+          limit={visibleTechnologies}
+        />
+        <ExperienceDetails job={job} text={text} />
       </div>
     </BentoCard>
   );
@@ -181,7 +151,7 @@ function TimelineMarker({
 
 export function Journey({ content }: Readonly<SectionProps>) {
   const text = content.ui;
-  const timeline = buildTimeline(content);
+  const jobs = sortExperience(content.experience);
 
   return (
     <Section id="journey">
@@ -205,16 +175,16 @@ export function Journey({ content }: Readonly<SectionProps>) {
         {/* The viewport covers the first slide's gutter so no sliver of the
             previous card shows at the end. */}
         <CarouselContent viewportClassName="-ml-4" className="ml-0">
-          {timeline.map((item, i) => (
+          {jobs.map((job, i) => (
             <CarouselItem
-              key={`${item.kind}-${item.dateFrom}-${item.dateTo}`}
+              key={`${job.company}-${job.dateFrom}`}
               className="flex basis-[85%] flex-col sm:basis-1/2 lg:basis-1/3"
             >
               <TimelineMarker
-                isCurrent={isOngoing(item)}
-                isLast={i === timeline.length - 1}
+                isCurrent={isOngoing(job)}
+                isLast={i === jobs.length - 1}
               />
-              <TimelineCard item={item} text={text} />
+              <ExperienceCard job={job} text={text} />
             </CarouselItem>
           ))}
         </CarouselContent>

@@ -71,7 +71,6 @@ export const en: PortfolioContent = {
     company: "Visit company",
     career: "My journey",
     careerTitle: "Learn. Build. Evolve.",
-    experience: "Experience",
     education: "Education",
     current: "Current",
     details: "View details",
@@ -155,22 +154,13 @@ export const en: PortfolioContent = {
       "I have a strong preference for backend logical development, designing and architecting robust, scalable solutions. However, whenever the opportunity arises, I also enjoy crafting user-friendly and functional interfaces, as what users see is ultimately what stays with them.",
     ],
   },
-  education: [
-    {
-      degree: "General Bachelor in Sciences",
-      institution: "Vicente Rocafuerte Experimental School",
-      dateFrom: "2009",
-      dateTo: "2015",
-      location: "Guayaquil, Ecuador",
-    },
-    {
-      degree: "Bachelor’s Degree in Computer Science",
-      institution: "Escuela Superior Politécnica del Litoral - ESPOL",
-      dateFrom: "2015",
-      dateTo: "2021",
-      location: "Guayaquil, Ecuador",
-    },
-  ],
+  education: {
+    degree: "Bachelor’s Degree in Computer Science",
+    institution: "Escuela Superior Politécnica del Litoral - ESPOL",
+    dateFrom: "2015",
+    dateTo: "2021",
+    location: "Guayaquil, Ecuador",
+  },
   experience: [
     {
       position: "Software Development Intern",
