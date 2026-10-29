@@ -1,16 +1,18 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @import "./theme.css";
 @import "./games.css";
 
 @layer base {
   html {
-    overflow-x: clip;
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
   }
 
+  /* On body, not html: body's overflow must reach the viewport so the
+     scroll lock of modal dialogs and menus can hide the scrollbar. */
   body {
-    @apply bg-background font-sans text-foreground antialiased;
+    @apply overflow-x-clip bg-background font-sans text-foreground antialiased;
   }
 
   h1,

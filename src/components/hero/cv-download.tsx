@@ -36,7 +36,7 @@ export function CvDownload({
           <Download />
         </a>
       </Button>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"

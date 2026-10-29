@@ -33,7 +33,7 @@ function ThemeMenu({ text }: { readonly text: PortfolioText }) {
   const ActiveIcon = themeIcons[themes.indexOf(theme)];
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" aria-label={text.theme}>
           <ActiveIcon />
