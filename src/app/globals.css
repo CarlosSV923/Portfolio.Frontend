@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./theme.css";
-@import "./games.css";
 
 @layer base {
   html {

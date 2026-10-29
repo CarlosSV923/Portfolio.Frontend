@@ -4,7 +4,7 @@ import { Gamepad2 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { TechIcon } from "@/components/tech-icon";
-import { TechnologySnake } from "@/components/technology-snake";
+import { TechSnake } from "@/components/games/tech-snake/tech-snake";
 import { BentoCard, BentoGrid, Eyebrow } from "@/components/ui/bento";
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -44,7 +44,7 @@ export function Skills({ content }: Readonly<SectionProps>) {
             eyebrow={text.snake.play}
             title={text.snake.gameTitle}
           />
-          <TechnologySnake
+          <TechSnake
             technologies={allTechnologies(content)}
             copy={text.snake}
             onExit={exitGame}
