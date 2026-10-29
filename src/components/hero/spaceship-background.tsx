@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 type Point = {
@@ -182,14 +183,22 @@ export function SpaceshipBackground({
   }, [paused]);
 
   return (
-    <div className="hero-spaceship-layer" ref={layerRef} aria-hidden="true">
-      <div className="hero-spaceship" ref={shipRef}>
-        <img
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden select-none"
+      ref={layerRef}
+      aria-hidden="true"
+    >
+      <div
+        className="absolute top-0 left-0 w-12 opacity-0 drop-shadow-[0_0_10px_color-mix(in_srgb,var(--primary)_45%,transparent)] will-change-transform"
+        ref={shipRef}
+      >
+        <Image
           src="/icons/icon_spaceship.png"
           alt=""
-          width={512}
-          height={512}
+          width={96}
+          height={96}
           draggable={false}
+          className="h-auto w-full opacity-75"
         />
       </div>
     </div>

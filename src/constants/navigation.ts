@@ -7,4 +7,6 @@ export const ids = [
   "contact",
 ];
 
-export const sectionObserverOptions = { rootMargin: "-15% 0px -65% 0px" };
+// A thin band just above the middle of the viewport: the section crossing it
+// is the active one, so short and tall sections both highlight correctly.
+export const sectionObserverOptions = { rootMargin: "-40% 0px -55% 0px" };

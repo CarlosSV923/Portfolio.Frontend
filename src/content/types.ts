@@ -10,6 +10,7 @@ export type General = {
   readonly lastName: string;
   readonly avatarPicture: string;
   readonly profession: string;
+  readonly yearsOfExperience: number;
 };
 
 export type Contact = {
@@ -21,6 +22,8 @@ export type Contact = {
 
 export type About = {
   readonly aboutPicture: string;
+  /** Short name of the school shown in the education stat. */
+  readonly school: string;
   readonly paragraphs: readonly string[];
 };
 
@@ -54,6 +57,11 @@ export type Project = {
   readonly technologies: readonly Technology[];
 };
 
+export type TechnologyGroup = {
+  readonly name: string;
+  readonly tech: readonly Technology[];
+};
+
 export type Interest = {
   readonly name: string;
   readonly description: string;
@@ -68,7 +76,7 @@ export type Profile = {
   readonly about: About;
   readonly education: readonly Education[];
   readonly experience: readonly Experience[];
-  readonly skills: { readonly tech: readonly Technology[] };
+  readonly skills: { readonly groups: readonly TechnologyGroup[] };
   readonly projects: readonly Project[];
   readonly interests: readonly Interest[];
 };
