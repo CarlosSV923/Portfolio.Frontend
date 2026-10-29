@@ -1,9 +1,8 @@
 "use client";
 
-import { Gamepad2, Pause, Play, RotateCcw, X } from "lucide-react";
+import { Pause, Play, RotateCcw, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { TechIcon } from "./tech-icon";
 import {
   boardColumns,
   boardRows,
@@ -23,30 +22,23 @@ import type {
   Technology,
 } from "./tech-snake/types";
 
+/** Mounted only while playing; unmounting ends the game. */
 export function TechnologySnake({
   technologies,
   copy,
-  onActiveChange,
+  onExit,
 }: Readonly<{
   technologies: readonly Technology[];
   copy: SnakeCopy;
-  onActiveChange: (isActive: boolean) => void;
+  onExit: () => void;
 }>) {
-  const [isActive, setIsActive] = useState(false);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-  const [isWelcomeOpen, setIsWelcomeOpen] = useState(false);
-  const [game, setGame] = useState<GameState>({
-    snake: [],
-    food: null,
-    unlocked: [],
-    status: "ready",
-  });
-  const directionRef = useRef<Direction>(directions.right);
-  const nextDirectionRef = useRef<Direction>(directions.right);
-
-  useEffect(() => {
-    onActiveChange(isActive);
-  }, [isActive, onActiveChange]);
+  const [initialGame] = useState(() =>
+    createGame(technologies, boardColumns, boardRows),
+  );
+  const [isWelcomeOpen, setIsWelcomeOpen] = useState(true);
+  const [game, setGame] = useState<GameState>(initialGame.state);
+  const directionRef = useRef<Direction>(initialGame.direction);
+  const nextDirectionRef = useRef<Direction>(initialGame.direction);
 
   const resetGame = useCallback(() => {
     const nextGame = createGame(technologies, boardColumns, boardRows);
@@ -55,12 +47,6 @@ export function TechnologySnake({
     nextDirectionRef.current = nextGame.direction;
     setGame(nextGame.state);
   }, [technologies]);
-
-  const startGame = useCallback(() => {
-    resetGame();
-    setIsWelcomeOpen(true);
-    setIsActive(true);
-  }, [resetGame]);
 
   const changeDirection = useCallback((nextDirection: Direction) => {
     if (!isOpposite(directionRef.current, nextDirection)) {
@@ -72,32 +58,19 @@ export function TechnologySnake({
     }
   }, []);
 
+  // The board needs a wide screen; leave the game if the window shrinks.
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 900px)");
-    const updateAvailability = () => {
-      setIsLargeScreen(mediaQuery.matches);
-
-      if (!mediaQuery.matches) {
-        setIsActive(false);
-      }
+    const exitOnSmallScreen = () => {
+      if (!mediaQuery.matches) onExit();
     };
 
-    updateAvailability();
-    mediaQuery.addEventListener("change", updateAvailability);
-
-    return () => mediaQuery.removeEventListener("change", updateAvailability);
-  }, []);
+    mediaQuery.addEventListener("change", exitOnSmallScreen);
+    return () => mediaQuery.removeEventListener("change", exitOnSmallScreen);
+  }, [onExit]);
 
   useEffect(() => {
-    if (!isActive || isWelcomeOpen) {
-      return;
-    }
-
-    resetGame();
-  }, [isActive, isWelcomeOpen, resetGame]);
-
-  useEffect(() => {
-    if (!isActive || game.status !== "running") {
+    if (game.status !== "running") {
       return;
     }
 
@@ -171,10 +144,10 @@ export function TechnologySnake({
     }, gameSpeed);
 
     return () => window.clearInterval(timer);
-  }, [game.status, isActive]);
+  }, [game.status]);
 
   useEffect(() => {
-    if (!isActive || isWelcomeOpen) {
+    if (isWelcomeOpen) {
       return;
     }
 
@@ -220,19 +193,15 @@ export function TechnologySnake({
       }
 
       if (event.key === "Escape") {
-        setIsActive(false);
+        onExit();
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [changeDirection, isActive, isWelcomeOpen]);
+  }, [changeDirection, isWelcomeOpen, onExit]);
 
   useEffect(() => {
-    if (!isActive) {
-      return;
-    }
-
     const pauseGame = () => {
       if (document.visibilityState === "hidden" || !document.hasFocus()) {
         setGame((currentGame) => ({
@@ -250,35 +219,7 @@ export function TechnologySnake({
       window.removeEventListener("blur", pauseGame);
       document.removeEventListener("visibilitychange", pauseGame);
     };
-  }, [isActive]);
-
-  if (!isActive) {
-    return (
-      <>
-        <div
-          className={`snake-launchbar ${
-            isLargeScreen ? "" : "snake-launchbar--mobile"
-          }`}
-        >
-          <p>{isLargeScreen ? copy.intro : copy.mobileIntro}</p>
-          {isLargeScreen && (
-            <button className="snake-button" type="button" onClick={startGame}>
-              <Gamepad2 size={18} />
-              {copy.play}
-            </button>
-          )}
-        </div>
-        <div className="skills-grid">
-          {technologies.map((technology) => (
-            <article className="skill-card" key={technology.name}>
-              <TechIcon name={technology.name} />
-              <span>{technology.name}</span>
-            </article>
-          ))}
-        </div>
-      </>
-    );
-  }
+  }, []);
 
   const gameHasEnded = game.status === "game-over" || game.status === "won";
   const statusMessage =
@@ -331,7 +272,7 @@ export function TechnologySnake({
             type="button"
             title={copy.exit}
             aria-label={copy.exit}
-            onClick={() => setIsActive(false)}
+            onClick={onExit}
           >
             <X size={18} />
           </button>
@@ -360,7 +301,7 @@ export function TechnologySnake({
           isWon={game.status === "won"}
           unlocked={game.unlocked}
           onRestart={resetGame}
-          onExit={() => setIsActive(false)}
+          onExit={onExit}
         />
       )}
     </div>

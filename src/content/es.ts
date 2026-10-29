@@ -15,22 +15,20 @@ export const es = {
       "Contacto",
     ],
     hello: "Hola, soy",
-    heroExperience: "5+ años de experiencia",
     intro:
       "Desarrollador Full Stack con más de 5 años de experiencia creando aplicaciones web utilizando tecnologías como NestJS, .NET, React, MongoDB y Apache Kafka.",
     heroCodeHint: "Toca los </>",
+    heroCodeTitle: "Código suelto",
     heroCodeAction: "Impulsar símbolo de código",
     work: "Explorar proyectos",
     cv: "Descargar CV",
     cvMenu: "Más opciones de descarga de CV",
     cvOther: "Descargar CV",
-    about: "UN POCO SOBRE MÍ",
+    about: "Un poco sobre mí",
     aboutTitle:
-      "“La única forma de hacer un gran trabajo es amar lo que haces.”",
-    aboutAccent: "Steve Jobs",
-    more: "Más sobre mí",
-    stats: ["Años de experiencia", "Tecnologías", "Formación", "Proyectos"],
-    skills: "MI CAJA DE HERRAMIENTAS",
+      "Me gusta el backend bien pensado y las interfaces que no estorban.",
+    stats: ["Años de experiencia", "Tecnologías", "Formación"],
+    skills: "Mi caja de herramientas",
     skillsTitle: "Tecnología con propósito.",
     skillsText:
       "Las herramientas con las que transformo desafíos en soluciones.",
@@ -78,28 +76,28 @@ export const es = {
       moveLeft: "Mover a la izquierda",
       moveRight: "Mover a la derecha",
     },
-    levels: "Autoevaluación de habilidades",
-    projects: "PROYECTOS SELECCIONADOS",
+    projects: "Proyectos seleccionados",
     projectsTitle: "Ideas que se hicieron realidad.",
     projectsText: "Una selección de lo que he ayudado a construir.",
     repo: "Ver repositorio",
     company: "Visitar empresa",
-    career: "MI RECORRIDO",
+    career: "Mi recorrido",
     careerTitle: "Aprender. Construir. Evolucionar.",
     experience: "Experiencia",
     education: "Educación",
-    interests: "FUERA DEL EDITOR",
+    interests: "Fuera del editor",
     interestsTitle: "También hay vida después del código.",
-    contact: "CONSTRUYAMOS ALGO JUNTOS",
+    contact: "Construyamos algo juntos",
     contactTitle: "¿Tienes una idea en mente?",
     contactText:
       "Conversemos sobre tu próximo proyecto y cómo puedo ayudarte a hacerlo realidad.",
     contactButton: "Hablemos",
-    social: "ENCUÉNTRAME EN",
+    social: "Encuéntrame en",
     contactMe: "Contáctame en:",
     heroPlayPrompt: "¿Jugamos algo?",
     space: {
       play: "Tech-Space",
+      teaser: "Pilotea la nave entre bloques de tecnologías sin chocar.",
       mobileIntro: "Usa la página desde un computador para jugar Tech-Space.",
       score: "Tecnologías superadas",
       shipAlt: "Nave espacial",
@@ -142,14 +140,13 @@ export const es = {
     language: "Idioma",
     menu: "Abrir menú",
     skip: "Saltar al contenido",
-    english: "Inglés",
-    details: "Logros y tecnologías",
   },
   general: {
     firstName: "Carlos",
     lastName: "Sesme",
     avatarPicture: "/images/avatar_picture.jpg",
     profession: "Desarrollador Full Stack",
+    yearsOfExperience: 5,
   },
   contact: {
     email: "carlos.sesme.923@gmail.com",
@@ -159,6 +156,7 @@ export const es = {
   },
   about: {
     aboutPicture: "/images/about_picture.jpg",
+    school: "ESPOL",
     paragraphs: [
       "Desarrollador Full Stack con más de 5 años de experiencia en la creación de aplicaciones web escalables con arquitectura de microservicios. Especializado en React, NestJS, .NET, MongoDB, Kubernetes y Apache Kafka.",
       "Tengo preferencia por el desarrollo lógico en el Backend, planteando y diseñando arquitecturas robustas y escalables. Sin embargo, cuando surge la oportunidad, también disfruto diseñando interfaces amigables y funcionales para los usuarios, ya que aquello que ven los usuarios es, al final, lo que se queda en su memoria.",
@@ -323,45 +321,31 @@ export const es = {
     },
   ],
   skills: {
-    tech: [
+    groups: [
       {
-        name: "NestJS",
+        name: "Lenguajes y frameworks",
+        tech: [
+          { name: "Typescript" },
+          { name: "Node.js" },
+          { name: "NestJS" },
+          { name: ".NET Core" },
+          { name: "Python" },
+          { name: "Next.js" },
+        ],
       },
       {
-        name: "Node.js",
+        name: "Datos y mensajería",
+        tech: [
+          { name: "MongoDB" },
+          { name: "MySQL" },
+          { name: "PostgreSQL" },
+          { name: "Kafka" },
+          { name: "GraphQL" },
+        ],
       },
       {
-        name: "Typescript",
-      },
-      {
-        name: "MongoDB",
-      },
-      {
-        name: "Docker",
-      },
-      {
-        name: ".NET Core",
-      },
-      {
-        name: "Azure Functions",
-      },
-      {
-        name: "GraphQL",
-      },
-      {
-        name: "Python",
-      },
-      {
-        name: "MySQL",
-      },
-      {
-        name: "PostgreSQL",
-      },
-      {
-        name: "Kafka",
-      },
-      {
-        name: "Next.js",
+        name: "Cloud y DevOps",
+        tech: [{ name: "Docker" }, { name: "Azure Functions" }],
       },
     ],
   },

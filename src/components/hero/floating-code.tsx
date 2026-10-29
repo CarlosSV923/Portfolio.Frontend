@@ -1,9 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { collide, keepInside, type Particle } from "./floating-code-physics";
 
-const glyphCount = 16;
+// Resting positions inside the card, as percentages of its size.
+const glyphPositions = [
+  { x: "8%", y: "18%" },
+  { x: "58%", y: "12%" },
+  { x: "30%", y: "46%" },
+  { x: "70%", y: "52%" },
+  { x: "12%", y: "72%" },
+  { x: "48%", y: "78%" },
+];
 const stopSpeed = 12;
 
 export function FloatingCode({
@@ -147,7 +155,7 @@ export function FloatingCode({
         return;
       }
 
-      if (target.closest("a, button, .portrait-frame, .code-card")) return;
+      if (target.closest("a, button")) return;
 
       const index = particles.findIndex((particle) => {
         if (!particle.visible) return false;
@@ -176,21 +184,35 @@ export function FloatingCode({
   }, []);
 
   return (
-    <div className="hero-code-background" ref={fieldRef}>
-      {Array.from({ length: glyphCount }, (_, index) => (
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden select-none"
+      ref={fieldRef}
+    >
+      {glyphPositions.map((position, index) => (
         <button
-          className="hero-code-glyph"
+          className="hero-code-glyph group pointer-events-auto absolute top-(--y) left-(--x) grid h-11 min-w-16 place-items-center rounded-lg font-mono text-2xl font-bold text-primary opacity-30 transition-opacity hover:opacity-70 focus-visible:opacity-70"
+          style={{ "--x": position.x, "--y": position.y } as CSSProperties}
           type="button"
           key={index}
           tabIndex={-1}
           aria-label={`${actionLabel} ${index + 1}`}
         >
-          <span className="hero-code-glyph-mark" aria-hidden="true">
+          <span
+            className="animate-code-float group-[.is-flying]:animate-none motion-reduce:animate-none"
+            aria-hidden="true"
+          >
             &lt;/&gt;
           </span>
         </button>
       ))}
-      <button className="hero-code-hint" type="button">
+      <button
+        className="hero-code-hint pointer-events-auto absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-md px-2 py-1 font-mono text-sm font-bold text-primary"
+        type="button"
+      >
+        <span
+          className="size-2 animate-pulse rounded-full bg-primary-bright motion-reduce:animate-none"
+          aria-hidden="true"
+        />
         {hint}
       </button>
     </div>
