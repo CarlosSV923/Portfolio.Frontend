@@ -127,23 +127,23 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
             <span className="code-key">const</span>
             {" developer = {\n"}
             {"  stack: ["}
-            <span className="code-string">'NestJS'</span>
+            <span className="code-string">{"'NestJS'"}</span>
             {",\n          "}
-            <span className="code-string">'Apache Kafka'</span>
+            <span className="code-string">{"'Apache Kafka'"}</span>
             {",\n          "}
-            <span className="code-string">'.Net'</span>
+            <span className="code-string">{"'.Net'"}</span>
             {"],\n  mindset: ["}
-            <span className="code-string">'Learn'</span>
+            <span className="code-string">{"'Learn'"}</span>
             {",\n            "}
-            <span className="code-string">'Build'</span>
+            <span className="code-string">{"'Build'"}</span>
             {",\n            "}
-            <span className="code-string">'Improve'</span>
+            <span className="code-string">{"'Improve'"}</span>
             {",\n            "}
-            <span className="code-string">'Coffee'</span>
+            <span className="code-string">{"'Coffee'"}</span>
             {",\n            "}
-            <span className="code-string">'Play Video Games'</span>
+            <span className="code-string">{"'Play Video Games'"}</span>
             {",\n            "}
-            <span className="code-string">'Repeat'</span>
+            <span className="code-string">{"'Repeat'"}</span>
             {"]\n};"}
           </pre>
         </div>

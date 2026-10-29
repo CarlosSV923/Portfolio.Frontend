@@ -202,7 +202,7 @@ export function TechSpace({
 
     const pauseWhenHidden = () => {
       if (document.visibilityState === "hidden") {
-        gameRef.current && (gameRef.current.lastTime = 0);
+        if (gameRef.current) gameRef.current.lastTime = 0;
         setPhase("ready");
       }
     };
