@@ -30,11 +30,16 @@ pnpm start
 
 Other available commands:
 
-| Command             | Purpose                           |
-| ------------------- | --------------------------------- |
-| `pnpm typecheck`    | Check TypeScript types.           |
-| `pnpm format:check` | Check formatting with Prettier.   |
-| `pnpm format`       | Format the project with Prettier. |
+| Command             | Purpose                              |
+| ------------------- | ------------------------------------ |
+| `pnpm lint`         | Lint the project with ESLint.        |
+| `pnpm typecheck`    | Check TypeScript types.              |
+| `pnpm test`         | Run the unit tests once with Vitest. |
+| `pnpm test:watch`   | Run the unit tests in watch mode.    |
+| `pnpm format:check` | Check formatting with Prettier.      |
+| `pnpm format`       | Format the project with Prettier.    |
+
+Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic in `src/components/tech-snake/game.ts` and `src/components/tech-space/game.ts`.
 
 ## Project structure
 
@@ -48,14 +53,14 @@ Other available commands:
 
 Edit `src/data/en.ts` and `src/data/es.ts` when changing portfolio content or interface text. Each file exposes one object: `ui` contains labels and game instructions; the other fields contain the page content. The contact links open an email client or external profiles; there is no contact form or server-side email service.
 
-## Deployment and releases
+## Continuous integration
+
+GitHub Actions runs `.github/workflows/ci.yml` on every pull request and on pushes to `main` and `develop`. It installs dependencies with the pinned pnpm version, then checks formatting, lint, types, unit tests, and the production build. Vercel deploys independently of this workflow.
+
+## Deployment
 
 The repository is prepared for Vercel with `main` as the production branch. After connecting the GitHub repository to Vercel, other branches such as `develop` can receive preview deployments. Import the repository root with the Next.js preset; `vercel.json` declares the framework, and `package.json` selects Node.js 24.
 
 The project pins pnpm 12.4.1. In Vercel, set `ENABLE_EXPERIMENTAL_COREPACK=1` for both Production and Preview so Corepack uses the version specified in `package.json`. Verify a preview build before publishing to production.
 
-Release Please runs on pushes to `main` and can also be started manually from GitHub Actions. It uses Conventional Commits to propose changes to `package.json` and `CHANGELOG.md` in a pull request. Merging that pull request creates a Git tag and GitHub Release. The package is private and is not published to npm.
-
-Enable **Allow GitHub Actions to create and approve pull requests** under **Settings → Actions → General → Workflow permissions** so Release Please can open release pull requests. The workflow uses the repository's `GITHUB_TOKEN`. If other GitHub Actions workflows need to run automatically on pull requests created by Release Please, use a GitHub App token or a personal access token instead.
-
-Vercel deploys changes merged into `main` independently of the later release tag. Review and merge `develop` into `main` before importing the repository for its first production deployment.
+Work is merged into `develop` through pull requests and promoted to production by merging `develop` into `main`. Commit messages follow Conventional Commits.
