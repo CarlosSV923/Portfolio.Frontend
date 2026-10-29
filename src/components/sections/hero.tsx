@@ -9,7 +9,8 @@ import { CvDownload } from "@/components/hero/cv-download";
 import { DegreeCard } from "@/components/hero/degree-card";
 import { SpaceshipBackground } from "@/components/hero/spaceship-background";
 import { SocialLinks } from "@/components/social-links";
-import { TechSpace } from "@/components/tech-space/tech-space";
+import { gameScreenQuery } from "@/components/games/shared/use-game-lifecycle";
+import { TechSpace } from "@/components/games/tech-space/tech-space";
 import { BentoCard, BentoGrid, Eyebrow } from "@/components/ui/bento";
 import { Button } from "@/components/ui/button";
 import { allTechnologies } from "@/content/technologies";
@@ -18,7 +19,6 @@ import type { Language, SectionProps } from "@/types/portfolio";
 
 type HeroProps = SectionProps & { readonly language: Language };
 
-const largeScreenQuery = "(min-width: 900px)";
 const openingDelay = 300;
 
 export function Hero({ content, language }: Readonly<HeroProps>) {
@@ -35,7 +35,7 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
   };
 
   const openGame = () => {
-    if (isOpening || !window.matchMedia(largeScreenQuery).matches) return;
+    if (isOpening || !window.matchMedia(gameScreenQuery).matches) return;
     setIsOpening(true);
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -49,23 +49,13 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
     );
   };
 
-  // The game needs a keyboard and a wide stage; leave it if the window shrinks.
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(largeScreenQuery);
-    const closeOnSmallScreen = () => {
-      if (mediaQuery.matches) return;
+  // TechSpace leaves by itself on small screens; only the timer needs cleanup.
+  useEffect(
+    () => () => {
       if (openingTimer.current) window.clearTimeout(openingTimer.current);
-      openingTimer.current = null;
-      setIsPlaying(false);
-      setIsOpening(false);
-    };
-
-    mediaQuery.addEventListener("change", closeOnSmallScreen);
-    return () => {
-      mediaQuery.removeEventListener("change", closeOnSmallScreen);
-      if (openingTimer.current) window.clearTimeout(openingTimer.current);
-    };
-  }, []);
+    },
+    [],
+  );
 
   if (isPlaying) {
     return (

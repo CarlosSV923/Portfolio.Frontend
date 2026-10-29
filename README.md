@@ -39,20 +39,19 @@ Other available commands:
 | `pnpm format:check` | Check formatting with Prettier.       |
 | `pnpm format`       | Format the project with Prettier.     |
 
-Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic in `src/components/tech-snake/game.ts` and `src/components/tech-space/game.ts`, and language matching in `src/i18n/config.ts`.
+Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic (`src/components/games/*/logic.ts`), the game keyboard filter, the experience ordering in `src/content/experience.ts`, and language matching in `src/i18n/config.ts`.
 
 ## Project structure
 
 - `src/app/[lang]/`: Root layout and page for each language, with metadata and static generation.
 - `src/app/theme.css`: Design tokens (colors, radii, fonts) for both themes, exposed to Tailwind.
 - `src/app/globals.css`: Tailwind entry point and base styles.
-- `src/app/games.css`: Plain CSS for the Tech-Snake and Tech-Space games.
 - `src/proxy.ts`: Redirects `/` to a language.
 - `src/components/sections/`: One component per page section (hero, about, skills, projects, journey, interests, contact).
 - `src/components/layout/`: Header and footer.
-- `src/components/hero/`: Hero cards (code card, CV download, spaceship).
+- `src/components/hero/`: Hero cards (code card, degree, CV download, spaceship).
 - `src/components/ui/`: shadcn/ui components plus the shared `BentoGrid`, `BentoCard`, `Section` and `SectionHeading`.
-- `src/components/tech-snake/`, `src/components/tech-space/`: The games.
+- `src/components/games/`: The games. Each one keeps its rules in a pure, tested `logic.ts` and its UI in components; `shared/` holds what both use: the game loop (`useAnimationFrame`, `useFixedStep`), keyboard bindings (`useGameKeys`), pausing when the tab is hidden, leaving on small screens, and the `GameDialog` built on shadcn's Dialog.
 - `src/content/`: Portfolio content and interface text (`es.ts`, `en.ts`) and their types.
 - `src/i18n/`: Supported languages and Accept-Language matching.
 - `src/lib/`: Theme store, site URL, and the `cn` class helper.
@@ -62,7 +61,7 @@ Unit tests live next to the code they cover as `*.test.ts` files. They cover the
 
 Edit `src/content/es.ts` and `src/content/en.ts` when changing portfolio content or interface text. Each file exposes one object: `ui` contains labels and game instructions; the other fields contain the page content. Spanish is the reference: TypeScript rejects the English file if a key is missing or extra. The contact links open an email client or external profiles; there is no contact form or server-side email service.
 
-Styling uses Tailwind CSS v4 with [shadcn/ui](https://ui.shadcn.com) conventions (`components.json`). Add components with `pnpm dlx shadcn@latest add <component>`; they land in `src/components/ui/`. Check the generated imports afterwards: `cn` must come from `@/lib/utils`, and any new dependency (such as `class-variance-authority`) must be in `package.json`.
+Styling uses Tailwind CSS v4 with [shadcn/ui](https://ui.shadcn.com) conventions (`components.json`). Add components with `pnpm dlx shadcn@latest add <component>`; they land in `src/components/ui/`. Check the generated imports afterwards: `cn` must come from `@/lib/utils` (the CLI may also install an unrelated `cn` package; remove it), and any new dependency (such as `class-variance-authority`) must be in `package.json`.
 
 ## Continuous integration
 

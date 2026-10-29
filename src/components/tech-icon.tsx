@@ -11,7 +11,13 @@ export function TechIcon({
 
   if (!file) {
     return (
-      <span className={cn("tech-monogram", className)} aria-hidden="true">
+      <span
+        className={cn(
+          "grid size-6.5 shrink-0 place-items-center rounded-md border border-primary font-mono text-xs font-extrabold text-primary",
+          className,
+        )}
+        aria-hidden="true"
+      >
         {name.slice(0, 2)}
       </span>
     );
@@ -19,7 +25,7 @@ export function TechIcon({
 
   return (
     <Image
-      className={cn("tech-icon", className)}
+      className={cn("size-6.5 shrink-0 object-contain", className)}
       src={`/icons/${file}`}
       alt=""
       width={48}
