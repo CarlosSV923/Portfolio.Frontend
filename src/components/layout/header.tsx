@@ -141,9 +141,12 @@ export function Header({ language, text }: HeaderProps) {
             className="flex rounded-lg border border-border p-0.5 text-xs font-bold"
           >
             {languages.map((l) => (
+              // Keeps the reader where they were: the other language has the
+              // same sections in the same order.
               <Link
                 key={l}
                 href={`/${l}`}
+                scroll={false}
                 hrefLang={l}
                 lang={l}
                 aria-current={language === l ? "page" : undefined}
