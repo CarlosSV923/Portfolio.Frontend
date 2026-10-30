@@ -3,7 +3,7 @@
 export const techIcons: Readonly<Record<string, string>> = {
   NestJS: "icon_nestjs.svg",
   "Node.js": "icon_nodejs.png",
-  Typescript: "icon_typescript.svg",
+  TypeScript: "icon_typescript.svg",
   MongoDB: "icon_mongodb.svg",
   Docker: "icon_docker.png",
   ".NET Core": "icon_csharp.png",
