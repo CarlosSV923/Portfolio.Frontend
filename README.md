@@ -12,7 +12,7 @@ A personal portfolio built with Next.js App Router, React, and TypeScript. It sh
 
 ## Run locally
 
-Install Node.js 24 and pnpm 12.4.1, then run these commands from the repository root:
+Install Node.js 26 and pnpm 12.4.1, then run these commands from the repository root:
 
 ```sh
 pnpm install --frozen-lockfile
@@ -71,7 +71,7 @@ GitHub Actions runs `.github/workflows/ci.yml` on every pull request and on push
 
 ## Deployment
 
-The repository is prepared for Vercel with `main` as the production branch. After connecting the GitHub repository to Vercel, other branches such as `develop` can receive preview deployments. Import the repository root with the Next.js preset; `vercel.json` declares the framework, and `package.json` selects Node.js 24.
+The repository is prepared for Vercel with `main` as the production branch. After connecting the GitHub repository to Vercel, other branches such as `develop` can receive preview deployments. Import the repository root with the Next.js preset; `vercel.json` declares the framework, and `package.json` selects Node.js 26, so set the Vercel project's Node.js version to 26.x as well.
 
 The project pins pnpm 12.4.1. In Vercel, set `ENABLE_EXPERIMENTAL_COREPACK=1` for both Production and Preview so Corepack uses the version specified in `package.json`. Verify a preview build before publishing to production.
 
