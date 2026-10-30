@@ -129,12 +129,12 @@ export function Hero({ content, language }: Readonly<HeroProps>) {
           </p>
         </BentoCard>
 
-        <BentoCard className="md:col-span-3 lg:col-span-3">
-          <CodeCard />
-        </BentoCard>
-
         <BentoCard className="md:col-span-3 lg:col-span-5">
           <DegreeCard education={content.education} label={text.education} />
+        </BentoCard>
+
+        <BentoCard className="md:col-span-3 lg:col-span-3">
+          <CodeCard />
         </BentoCard>
 
         <BentoCard className="flex min-h-64 flex-col justify-between gap-4 md:col-span-6 lg:col-span-4">

@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Code2, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { faviconPaths } from "@/constants/favicon";
 import { ids, sectionObserverOptions } from "@/constants/navigation";
 import { themeIcons } from "@/constants/icons";
 import { useTheme } from "@/hooks/use-theme";
@@ -105,13 +107,24 @@ export function Header({ language, text }: HeaderProps) {
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <a
           href="#home"
-          className="flex items-center gap-2 font-heading text-lg font-bold"
+          className="shrink-0 rounded-lg"
           aria-label={`Carlos Sesme — ${text.nav[0]}`}
         >
-          <Code2 className="size-5 text-primary" />
-          <span>
-            carlos<span className="text-primary">.</span>sesme
-          </span>
+          {/* Same pair as the browser tab icon, switched with the theme. */}
+          <Image
+            src={faviconPaths.light}
+            alt=""
+            width={36}
+            height={36}
+            className="size-9 dark:hidden"
+          />
+          <Image
+            src={faviconPaths.dark}
+            alt=""
+            width={36}
+            height={36}
+            className="hidden size-9 dark:block"
+          />
         </a>
 
         <nav
@@ -128,9 +141,12 @@ export function Header({ language, text }: HeaderProps) {
             className="flex rounded-lg border border-border p-0.5 text-xs font-bold"
           >
             {languages.map((l) => (
+              // Keeps the reader where they were: the other language has the
+              // same sections in the same order.
               <Link
                 key={l}
                 href={`/${l}`}
+                scroll={false}
                 hrefLang={l}
                 lang={l}
                 aria-current={language === l ? "page" : undefined}

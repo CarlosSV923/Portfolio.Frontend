@@ -46,16 +46,62 @@ export type Experience = {
   readonly location: string;
 };
 
-export type Project = {
+export const projectCategories = [
+  "professional",
+  "web",
+  "nas",
+  "desktop",
+  "ai",
+] as const;
+export type ProjectCategory = (typeof projectCategories)[number];
+
+export type ProjectSlug =
+  | "aurora"
+  | "gamebook"
+  | "gameexplorer"
+  | "videoexplorer"
+  | "winclonerx"
+  | "turnontv";
+
+/** Language-neutral facts about a project; see `projects.ts`. */
+export type ProjectInfo = {
+  readonly slug: ProjectSlug;
   readonly name: string;
-  readonly type: string;
-  readonly owner: string;
-  readonly description: string;
-  readonly repositoryUrl: string;
-  readonly companyUrl: string;
-  readonly backgroundPicture: string;
+  readonly category: ProjectCategory;
+  /** Company the project was built for, if any. */
+  readonly owner?: string;
   readonly technologies: readonly Technology[];
+  readonly links: {
+    readonly demo?: string;
+    readonly repository?: string;
+    /** Interactive architecture diagrams. */
+    readonly architecture?: string;
+    readonly releases?: string;
+    readonly company?: string;
+  };
 };
+
+/** Per-language text and images of a project. */
+export type ProjectText = {
+  readonly summary: string;
+  /** Bullet points for the details dialog. */
+  readonly highlights: readonly string[];
+  readonly media: {
+    /** Screenshot shown on the card. */
+    readonly cover: string;
+    /** Animated walkthrough; only loaded when the dialog opens. */
+    readonly demo?: string;
+    /** Captioned screenshots shown as a carousel in the dialog. */
+    readonly gallery?: readonly {
+      readonly src: string;
+      readonly caption: string;
+    }[];
+    /** Static architecture diagram (SVG). */
+    readonly architecture?: string;
+  };
+};
+
+export type Project = ProjectInfo & ProjectText;
 
 export type TechnologyGroup = {
   readonly name: string;
@@ -78,7 +124,7 @@ export type Profile = {
   readonly education: Education;
   readonly experience: readonly Experience[];
   readonly skills: { readonly groups: readonly TechnologyGroup[] };
-  readonly projects: readonly Project[];
+  readonly projects: Readonly<Record<ProjectSlug, ProjectText>>;
   readonly interests: readonly Interest[];
 };
 

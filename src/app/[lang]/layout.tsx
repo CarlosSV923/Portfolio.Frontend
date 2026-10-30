@@ -46,6 +46,8 @@ export async function generateMetadata({
         .filter((l) => l !== lang)
         .map((l) => ogLocales[l]),
     },
+    // The image itself comes from ./opengraph-image.tsx.
+    twitter: { card: "summary_large_image" },
   };
 }
 
@@ -60,6 +62,9 @@ export default async function RootLayout({
     <html
       lang={lang}
       className={`${dmSans.variable} ${manrope.variable}`}
+      // Lets Next.js turn off smooth scrolling while it scrolls after a
+      // navigation; otherwise its scroll calls animate and fight each other.
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <head>
