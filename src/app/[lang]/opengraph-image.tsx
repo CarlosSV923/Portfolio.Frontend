@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { notFound } from "next/navigation";
 import { ImageResponse } from "next/og";
 
+import { faviconPaths } from "@/constants/favicon";
 import { getContent } from "@/content";
 import { allTechnologies } from "@/content/technologies";
 import { isLanguage, languages } from "@/i18n/config";
@@ -38,9 +39,11 @@ export default async function OpengraphImage({
 
   const content = getContent(lang);
   const { general, contact, ui } = content;
-  const avatar = await readFile(
-    join(process.cwd(), "public", general.avatarPicture),
-  );
+  const [avatar, logo] = await Promise.all([
+    readFile(join(process.cwd(), "public", general.avatarPicture)),
+    // The dark-theme tab icon, as the header shows on this dark background.
+    readFile(join(process.cwd(), "public", faviconPaths.dark)),
+  ]);
   const technologies = allTechnologies(content).slice(0, shownTechnologies);
 
   return new ImageResponse(
@@ -57,13 +60,17 @@ export default async function OpengraphImage({
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-        <div style={{ display: "flex", fontSize: 28, color: colors.primary }}>
-          {"</> carlos.sesme"}
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element -- rendered to a PNG by ImageResponse, not the browser */}
+        <img
+          src={`data:image/png;base64,${logo.toString("base64")}`}
+          alt=""
+          width={64}
+          height={64}
+        />
         <div
           style={{
             display: "flex",
-            marginTop: 36,
+            marginTop: 32,
             fontSize: 76,
             fontWeight: 800,
             letterSpacing: -2,

@@ -14,7 +14,7 @@ import {
 } from "./logic";
 import type { GameState, Point } from "./types";
 
-const technologies = ["NestJS", "Node.js", "Typescript", "MongoDB"].map(
+const technologies = ["NestJS", "Node.js", "TypeScript", "MongoDB"].map(
   (name) => ({ name }),
 );
 

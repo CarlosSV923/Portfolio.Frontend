@@ -146,7 +146,7 @@ export const es = {
       technologyDescriptions: {
         NestJS: "Framework de Node.js para servicios escalables.",
         "Node.js": "Entorno para ejecutar JavaScript en el servidor.",
-        Typescript: "JavaScript con tipos para código más seguro.",
+        TypeScript: "JavaScript con tipos para código más seguro.",
         MongoDB: "Base de datos NoSQL orientada a documentos.",
         Docker: "Contenedores para empaquetar y ejecutar aplicaciones.",
         ".NET Core": "Plataforma multiplataforma para aplicaciones y APIs.",
@@ -305,7 +305,7 @@ export const es = {
           name: "Javascript",
         },
         {
-          name: "Typescript",
+          name: "TypeScript",
         },
         {
           name: "Reactjs",
@@ -347,7 +347,7 @@ export const es = {
       {
         name: "Lenguajes y frameworks",
         tech: [
-          { name: "Typescript" },
+          { name: "TypeScript" },
           { name: "Node.js" },
           { name: "NestJS" },
           { name: ".NET Core" },

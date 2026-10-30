@@ -136,7 +136,7 @@ export const en: PortfolioContent = {
       technologyDescriptions: {
         NestJS: "A Node.js framework for scalable services.",
         "Node.js": "A runtime for JavaScript on the server.",
-        Typescript: "JavaScript with types for safer code.",
+        TypeScript: "JavaScript with types for safer code.",
         MongoDB: "A document-oriented NoSQL database.",
         Docker: "Containers for packaging and running applications.",
         ".NET Core": "A cross-platform framework for applications and APIs.",
@@ -295,7 +295,7 @@ export const en: PortfolioContent = {
           name: "Javascript",
         },
         {
-          name: "Typescript",
+          name: "TypeScript",
         },
         {
           name: "Reactjs",
@@ -337,7 +337,7 @@ export const en: PortfolioContent = {
       {
         name: "Languages and frameworks",
         tech: [
-          { name: "Typescript" },
+          { name: "TypeScript" },
           { name: "Node.js" },
           { name: "NestJS" },
           { name: ".NET Core" },
