@@ -46,6 +46,8 @@ export async function generateMetadata({
         .filter((l) => l !== lang)
         .map((l) => ogLocales[l]),
     },
+    // The image itself comes from ./opengraph-image.tsx.
+    twitter: { card: "summary_large_image" },
   };
 }
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { techIcons } from "@/constants/technologies";
+import { darkThemeIconClasses, techIcons } from "@/constants/technologies";
 import { cn } from "@/lib/utils";
 
 export function TechIcon({
@@ -25,7 +25,11 @@ export function TechIcon({
 
   return (
     <Image
-      className={cn("size-6.5 shrink-0 object-contain", className)}
+      className={cn(
+        "size-6.5 shrink-0 object-contain",
+        darkThemeIconClasses[name],
+        className,
+      )}
       src={`/icons/${file}`}
       alt=""
       width={48}

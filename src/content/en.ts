@@ -69,6 +69,30 @@ export const en: PortfolioContent = {
     projectsText: "A selection of things I have helped build.",
     repo: "View repository",
     company: "Visit company",
+    demo: "View demo",
+    releases: "Download",
+    walkthrough: "Walkthrough",
+    highlights: "Highlights",
+    architecture: "Architecture",
+    architectureLink: "View interactive architecture",
+    projectCategories: {
+      professional: {
+        title: "Professional",
+        description: "Built at work, for real customers.",
+      },
+      web: {
+        title: "Web and microservices",
+        description: "Distributed systems, end to end.",
+      },
+      nas: {
+        title: "NAS apps",
+        description: "Self-hosted on my home TrueNAS.",
+      },
+      desktop: {
+        title: "Windows desktop",
+        description: "Native tools for Windows.",
+      },
+    },
     career: "My journey",
     careerTitle: "Learn. Build. Evolve.",
     education: "Education",
@@ -332,35 +356,85 @@ export const en: PortfolioContent = {
       },
     ],
   },
-  projects: [
-    {
-      name: "Aurora",
-      type: "Web Project",
-      owner: "Siigo S.A.",
-      description:
-        "Payment gateway for the company Siigo S.A. that allows users to make payments for their invoices securely and quickly.",
-      repositoryUrl: "",
-      companyUrl: "https://siigo.com",
-      backgroundPicture: "/images/bg_project_aurora.png",
-      technologies: [
-        {
-          name: "React.js",
-        },
-        {
-          name: "NestJs",
-        },
-        {
-          name: "MongoDB",
-        },
-        {
-          name: "C#",
-        },
-        {
-          name: "Azure",
-        },
-      ],
+  projects: {
+    aurora: {
+      summary:
+        "Payment gateway for Siigo S.A. that lets its customers pay their invoices quickly and securely.",
+      highlights: [],
+      media: {
+        cover: { src: "/projects/aurora/cover.webp", kind: "screenshot" },
+      },
     },
-  ],
+    gamebook: {
+      summary:
+        "Video game catalog with IGDB's top-rated titles, user accounts and a favorites shelf. A Next.js frontend and two NestJS microservices.",
+      highlights: [
+        "The Next.js frontend renders the catalog on the server and keeps the IGDB credentials out of the browser.",
+        "AuthUser handles sign-up and sign-in with RS256 JWTs and sessions that can be revoked instantly.",
+        "Game stores each user's favorites with filters and pagination, checking the token and the session first.",
+        "PostgreSQL with Prisma, one schema per service, and independent deployments to Vercel and Render with GitHub Actions.",
+        "Built with spec-driven development, in English and Spanish, with light and dark themes.",
+      ],
+      media: {
+        cover: { src: "/projects/gamebook/cover-en.webp", kind: "screenshot" },
+        demo: "/projects/gamebook/demo-en.webp",
+        architecture: "/projects/gamebook/architecture-en.svg",
+      },
+    },
+    gameexplorer: {
+      summary:
+        "Self-hosted app to upload, organize and download emulation games on a home NAS, with a UI inspired by EmulationStation.",
+      highlights: [
+        "Six consoles, each one a self-contained module: Nintendo 64, GameCube, Wii, Switch, PlayStation 2 and PSP.",
+        "Resumable uploads of tens of gigabytes, extracted with 7-Zip and verified against their CRC.",
+        "Catches duplicates before writing anything and rolls back any library change that fails half-way.",
+        "A single Go binary with the React app embedded, deployed as a TrueNAS SCALE app.",
+        "Works with mouse, keyboard, touch screen or gamepad.",
+      ],
+      media: {
+        cover: {
+          src: "/projects/gameexplorer/cover-en.webp",
+          kind: "screenshot",
+        },
+        demo: "/projects/gameexplorer/demo-en.webp",
+        architecture: "/projects/gameexplorer/architecture-en.svg",
+      },
+    },
+    videoexplorer: {
+      summary:
+        "Self-hosted app that organizes movies and series on a home NAS so Jellyfin recognizes them, with a Netflix-style library.",
+      highlights: [
+        "Resumable uploads, including zip, 7z and rar archives extracted with 7-Zip.",
+        "Suggests titles from TMDB and names folders, videos and subtitles with the Jellyfin convention.",
+        "Picks up files copied over SMB and asks Jellyfin to refresh only the folders that changed.",
+        "Trash with restore, multi-select, and downloads of single files or whole titles.",
+        "Version 1.0, tested on a real TrueNAS SCALE NAS, with its image published to GHCR.",
+      ],
+      media: {
+        cover: {
+          src: "/projects/videoexplorer/cover-en.webp",
+          kind: "screenshot",
+        },
+        demo: "/projects/videoexplorer/demo-en.webp",
+        architecture: "/projects/videoexplorer/architecture-en.svg",
+      },
+    },
+    winclonerx: {
+      summary:
+        "Windows app that clones the system disk to another disk (HDD, SATA or NVMe SSD, internal or USB) and leaves the copy ready to boot.",
+      highlights: [
+        "A five-step wizard in English and Spanish, following the Windows language.",
+        "If the target disk is smaller, it shrinks C: temporarily and restores its size afterwards, even if cloning fails or is interrupted.",
+        "Checks UEFI and GPT before starting and warns when the partition uses BitLocker.",
+        "Every release publishes the installer's SHA-256 hash and a GitHub provenance attestation.",
+        ".NET 10 and WPF with DDD, hexagonal architecture and spec-driven development.",
+      ],
+      media: {
+        cover: { src: "/projects/winclonerx/icon.svg", kind: "icon" },
+        architecture: "/projects/winclonerx/architecture-en.svg",
+      },
+    },
+  },
   interests: [
     {
       name: "Travel and Photography",

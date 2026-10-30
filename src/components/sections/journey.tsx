@@ -1,5 +1,6 @@
 import { ArrowUpRight, BriefcaseBusiness, MapPin } from "lucide-react";
 
+import { TechnologyBadges } from "@/components/technology-badges";
 import { Badge } from "@/components/ui/badge";
 import { BentoCard } from "@/components/ui/bento";
 import { Button } from "@/components/ui/button";
@@ -27,29 +28,6 @@ import type { PortfolioText, SectionProps } from "@/types/portfolio";
 const visibleTechnologies = 3;
 
 type JobProps = Readonly<{ job: Experience; text: PortfolioText }>;
-
-function TechnologyBadges({
-  technologies,
-  limit,
-}: Readonly<{ technologies: Experience["attitudes"]; limit?: number }>) {
-  const shown = technologies.slice(0, limit);
-  const hidden = technologies.length - shown.length;
-
-  return (
-    <ul className="flex flex-wrap gap-1.5">
-      {shown.map((tech) => (
-        <li key={tech.name}>
-          <Badge variant="secondary">{tech.name}</Badge>
-        </li>
-      ))}
-      {hidden > 0 && (
-        <li>
-          <Badge variant="outline">+{hidden}</Badge>
-        </li>
-      )}
-    </ul>
-  );
-}
 
 function ExperienceDetails({ job, text }: JobProps) {
   return (

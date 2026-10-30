@@ -39,7 +39,7 @@ Other available commands:
 | `pnpm format:check` | Check formatting with Prettier.       |
 | `pnpm format`       | Format the project with Prettier.     |
 
-Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic (`src/components/games/*/logic.ts`), the game keyboard filter, the experience ordering in `src/content/experience.ts`, and language matching in `src/i18n/config.ts`.
+Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic (`src/components/games/*/logic.ts`), the game keyboard filter, the experience ordering in `src/content/experience.ts`, the project grouping and media files in `src/content/projects.ts`, and language matching in `src/i18n/config.ts`.
 
 ## Project structure
 
@@ -51,6 +51,8 @@ Unit tests live next to the code they cover as `*.test.ts` files. They cover the
 - `src/components/layout/`: Header and footer.
 - `src/components/hero/`: Hero cards (code card, degree, CV download, spaceship).
 - `src/components/ui/`: shadcn/ui components plus the shared `BentoGrid`, `BentoCard`, `Section` and `SectionHeading`.
+- `src/components/projects/`: Project card, details dialog and links. Language-neutral project facts (category, technologies, links) live in `src/content/projects.ts`; each language file holds the summary, highlights and media paths. Images are in `public/projects/<slug>/`: WebP covers, animated WebP walkthroughs and architecture SVGs copied from each project's repository.
+- `src/app/[lang]/opengraph-image.tsx`, `src/app/sitemap.ts`, `src/app/robots.ts`: Link previews per language, sitemap with hreflang alternates, and robots.
 - `src/components/games/`: The games. Each one keeps its rules in a pure, tested `logic.ts` and its UI in components; `shared/` holds what both use: the game loop (`useAnimationFrame`, `useFixedStep`), keyboard bindings (`useGameKeys`), pausing when the tab is hidden, leaving on small screens, and the `GameDialog` built on shadcn's Dialog.
 - `src/content/`: Portfolio content and interface text (`es.ts`, `en.ts`) and their types.
 - `src/i18n/`: Supported languages and Accept-Language matching.
