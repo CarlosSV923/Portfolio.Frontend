@@ -4,3 +4,5 @@ node_modules/
 *.log
 .env*
 .vercel/
+.codebase-memory/
+next-env.d.ts

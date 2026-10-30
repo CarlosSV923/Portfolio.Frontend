@@ -1,82 +1,81 @@
-import type { PortfolioData } from "@/types/portfolio";
+import { cn } from "@/lib/utils";
+import type { PortfolioContent } from "@/types/portfolio";
 
 import { GithubIcon, LinkedinIcon, MailIcon } from "./Icons.svg";
 
 type SocialLinksProps = {
-  readonly contact: PortfolioData["contact"];
+  readonly contact: PortfolioContent["contact"];
   readonly emailLabel: string;
   readonly variant?: "icons" | "text";
+  readonly className?: string;
 };
 
-const socialIcons = {
-  github: GithubIcon,
-  email: MailIcon,
-  linkedin: LinkedinIcon,
-} as const;
-
-function SocialIcon({
-  name,
-  size,
-}: {
-  readonly name: keyof typeof socialIcons;
-  readonly size: number;
-}) {
-  const Icon = socialIcons[name];
-
-  return <Icon size={size} />;
+function socialLinks(contact: PortfolioContent["contact"], emailLabel: string) {
+  return [
+    { label: "GitHub", text: "GitHub", href: contact.github, Icon: GithubIcon },
+    {
+      label: emailLabel,
+      text: contact.email,
+      href: `mailto:${contact.email}`,
+      Icon: MailIcon,
+    },
+    {
+      label: "LinkedIn",
+      text: "LinkedIn",
+      href: contact.linkedin,
+      Icon: LinkedinIcon,
+    },
+  ];
 }
 
 export function SocialLinks({
   contact,
   emailLabel,
   variant = "icons",
+  className,
 }: SocialLinksProps) {
+  const links = socialLinks(contact, emailLabel);
+
   if (variant === "text") {
     return (
-      <div className="social-links text-links">
-        <a href={contact.github} target="_blank" rel="noopener noreferrer">
-          <SocialIcon name="github" size={22} />
-          GitHub
-        </a>
-        <a href={`mailto:${contact.email}`}>
-          <SocialIcon name="email" size={22} />
-          {contact.email}
-        </a>
-        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer">
-          <SocialIcon name="linkedin" size={22} />
-          LinkedIn
-        </a>
-      </div>
+      <ul className={cn("grid gap-1", className)}>
+        {links.map(({ text, href, Icon }) => (
+          <li key={href}>
+            <a
+              href={href}
+              {...(href.startsWith("http") && {
+                target: "_blank",
+                rel: "noopener noreferrer",
+              })}
+              className="-mx-2 flex items-center gap-3 rounded-lg px-2 py-2 break-all text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              <Icon size={20} />
+              {text}
+            </a>
+          </li>
+        ))}
+      </ul>
     );
   }
 
   return (
-    <div className="social-links">
-      <a
-        href={contact.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        title="GitHub"
-      >
-        <SocialIcon name="github" size={19} />
-      </a>
-      <a
-        href={`mailto:${contact.email}`}
-        aria-label={emailLabel}
-        title={emailLabel}
-      >
-        <SocialIcon name="email" size={19} />
-      </a>
-      <a
-        href={contact.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        title="LinkedIn"
-      >
-        <SocialIcon name="linkedin" size={19} />
-      </a>
-    </div>
+    <ul className={cn("flex gap-2", className)}>
+      {links.map(({ label, href, Icon }) => (
+        <li key={href}>
+          <a
+            href={href}
+            aria-label={label}
+            title={label}
+            {...(href.startsWith("http") && {
+              target: "_blank",
+              rel: "noopener noreferrer",
+            })}
+            className="grid size-11 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <Icon size={19} />
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }

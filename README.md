@@ -4,11 +4,11 @@ A personal portfolio built with Next.js App Router, React, and TypeScript. It sh
 
 ## Features
 
-- English and Spanish content, with the selected language saved in the browser.
+- Statically rendered Spanish (`/es`) and English (`/en`) pages, each with its own title, description, and `hreflang` links. Visiting `/` redirects to the last language chosen, or to the browser's preferred language.
 - Light, dark, and system theme options, with matching browser tab icons.
 - Responsive sections for projects, career history, interests, and contact information.
-- Tech-Snake, an optional desktop-only game in the technologies section.
-- Portfolio content stored in local JSON files; no backend or environment variables are required to run the site locally.
+- Tech-Snake and Tech-Space, optional desktop-only games in the technologies and hero sections.
+- Portfolio content and interface text stored in two TypeScript files; no backend or environment variables are required to run the site locally.
 
 ## Run locally
 
@@ -19,7 +19,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The site starts in Spanish and uses the system theme until you choose another option.
+Open [http://localhost:3000](http://localhost:3000). It redirects to `/es` or `/en` and uses the system theme until you choose another option.
 
 To check the production build locally:
 
@@ -30,32 +30,49 @@ pnpm start
 
 Other available commands:
 
-| Command             | Purpose                           |
-| ------------------- | --------------------------------- |
-| `pnpm typecheck`    | Check TypeScript types.           |
-| `pnpm format:check` | Check formatting with Prettier.   |
-| `pnpm format`       | Format the project with Prettier. |
+| Command             | Purpose                               |
+| ------------------- | ------------------------------------- |
+| `pnpm lint`         | Lint the project with ESLint.         |
+| `pnpm typecheck`    | Generate route types and check types. |
+| `pnpm test`         | Run the unit tests once with Vitest.  |
+| `pnpm test:watch`   | Run the unit tests in watch mode.     |
+| `pnpm format:check` | Check formatting with Prettier.       |
+| `pnpm format`       | Format the project with Prettier.     |
+
+Unit tests live next to the code they cover as `*.test.ts` files. They cover the game logic (`src/components/games/*/logic.ts`), the game keyboard filter, the experience ordering in `src/content/experience.ts`, the project grouping and media files in `src/content/projects.ts`, and language matching in `src/i18n/config.ts`.
 
 ## Project structure
 
-- `src/app/`: App Router entry point, metadata, and global styles.
-- `src/components/`: Page sections, shared UI, and Tech-Snake components.
-- `src/constants/`: Interface labels, navigation, technology icons, and preferences.
-- `src/data/en.json` and `src/data/es.json`: Portfolio content in both languages.
-- `src/hooks/` and `src/types/`: Preference state and shared types.
+- `src/app/[lang]/`: Root layout and page for each language, with metadata and static generation.
+- `src/app/theme.css`: Design tokens (colors, radii, fonts) for both themes, exposed to Tailwind.
+- `src/app/globals.css`: Tailwind entry point and base styles.
+- `src/proxy.ts`: Redirects `/` to a language.
+- `src/components/sections/`: One component per page section (hero, about, skills, projects, journey, interests, contact).
+- `src/components/layout/`: Header and footer.
+- `src/components/hero/`: Hero cards (code card, degree, CV download, spaceship).
+- `src/components/ui/`: shadcn/ui components plus the shared `BentoGrid`, `BentoCard`, `Section` and `SectionHeading`.
+- `src/components/projects/`: Project card, details dialog and links. Language-neutral project facts (category, technologies, links) live in `src/content/projects.ts`; each language file holds the summary, highlights and media paths. Images are in `public/projects/<slug>/`: WebP covers and screenshots, animated WebP walkthroughs and architecture SVGs copied from each project's repository.
+- `src/app/[lang]/opengraph-image.tsx`, `src/app/sitemap.ts`, `src/app/robots.ts`: Link previews per language, sitemap with hreflang alternates, and robots.
+- `src/components/games/`: The games. Each one keeps its rules in a pure, tested `logic.ts` and its UI in components; `shared/` holds what both use: the game loop (`useAnimationFrame`, `useFixedStep`), keyboard bindings (`useGameKeys`), pausing when the tab is hidden, leaving on small screens, and the `GameDialog` built on shadcn's Dialog.
+- `src/content/`: Portfolio content and interface text (`es.ts`, `en.ts`) and their types.
+- `src/i18n/`: Supported languages and Accept-Language matching.
+- `src/lib/`: Theme store, site URL, and the `cn` class helper.
+- `src/constants/`, `src/hooks/` and `src/types/`: Navigation, icons, the theme hook, and shared types.
 - `public/images/` and `public/icons/`: Images and icons used by the site.
-- `public/files/cv.pdf`: Downloadable résumé.
+- `public/files/`: English and Spanish downloadable résumés.
 
-Update both JSON files when changing portfolio content. Interface copy, including the game instructions, lives in `src/constants/labels.ts`. The contact links open an email client or external profiles; there is no contact form or server-side email service.
+Edit `src/content/es.ts` and `src/content/en.ts` when changing portfolio content or interface text. Each file exposes one object: `ui` contains labels and game instructions; the other fields contain the page content. Spanish is the reference: TypeScript rejects the English file if a key is missing or extra. The contact links open an email client or external profiles; there is no contact form or server-side email service.
 
-## Deployment and releases
+Styling uses Tailwind CSS v4 with [shadcn/ui](https://ui.shadcn.com) conventions (`components.json`). Add components with `pnpm dlx shadcn@latest add <component>`; they land in `src/components/ui/`. Check the generated imports afterwards: `cn` must come from `@/lib/utils` (the CLI may also install an unrelated `cn` package; remove it), and any new dependency (such as `class-variance-authority`) must be in `package.json`.
+
+## Continuous integration
+
+GitHub Actions runs `.github/workflows/ci.yml` on every pull request and on pushes to `main` and `develop`. It installs dependencies with the pinned pnpm version, then checks formatting, lint, types, unit tests, and the production build. Vercel deploys independently of this workflow.
+
+## Deployment
 
 The repository is prepared for Vercel with `main` as the production branch. After connecting the GitHub repository to Vercel, other branches such as `develop` can receive preview deployments. Import the repository root with the Next.js preset; `vercel.json` declares the framework, and `package.json` selects Node.js 24.
 
 The project pins pnpm 12.4.1. In Vercel, set `ENABLE_EXPERIMENTAL_COREPACK=1` for both Production and Preview so Corepack uses the version specified in `package.json`. Verify a preview build before publishing to production.
 
-Release Please runs on pushes to `main` and can also be started manually from GitHub Actions. It uses Conventional Commits to propose changes to `package.json` and `CHANGELOG.md` in a pull request. Merging that pull request creates a Git tag and GitHub Release. The package is private and is not published to npm.
-
-Enable **Allow GitHub Actions to create and approve pull requests** under **Settings → Actions → General → Workflow permissions** so Release Please can open release pull requests. The workflow uses the repository's `GITHUB_TOKEN`. If other GitHub Actions workflows need to run automatically on pull requests created by Release Please, use a GitHub App token or a personal access token instead.
-
-Vercel deploys changes merged into `main` independently of the later release tag. Review and merge `develop` into `main` before importing the repository for its first production deployment.
+Work is merged into `develop` through pull requests and promoted to production by merging `develop` into `main`. Commit messages follow Conventional Commits.

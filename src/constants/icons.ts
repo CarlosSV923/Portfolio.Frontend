@@ -3,7 +3,6 @@ import {
   Moon,
   Monitor,
   BriefcaseBusiness,
-  Code2,
   Layers,
   GraduationCap,
 } from "lucide-react";
@@ -13,5 +12,4 @@ export const statisticIcons = [
   BriefcaseBusiness,
   Layers,
   GraduationCap,
-  Code2,
 ] as const;
