@@ -51,11 +51,17 @@ export const projectCategories = [
   "web",
   "nas",
   "desktop",
+  "ai",
 ] as const;
 export type ProjectCategory = (typeof projectCategories)[number];
 
 export type ProjectSlug =
-  "aurora" | "gamebook" | "gameexplorer" | "videoexplorer" | "winclonerx";
+  | "aurora"
+  | "gamebook"
+  | "gameexplorer"
+  | "videoexplorer"
+  | "winclonerx"
+  | "turnontv";
 
 /** Language-neutral facts about a project; see `projects.ts`. */
 export type ProjectInfo = {

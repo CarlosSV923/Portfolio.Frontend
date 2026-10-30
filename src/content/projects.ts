@@ -71,6 +71,13 @@ export const projectCatalog: readonly ProjectInfo[] = [
       architecture: pages("WinClonerX"),
     },
   },
+  {
+    slug: "turnontv",
+    name: "TurnOnTv",
+    category: "ai",
+    technologies: tech("Python", "PowerShell", "Bash", "systemd"),
+    links: { repository: github("TurnOnTv") },
+  },
 ];
 
 export type ProjectGroup = {

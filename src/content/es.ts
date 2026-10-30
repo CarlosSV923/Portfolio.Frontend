@@ -103,6 +103,10 @@ export const es = {
         title: "Escritorio Windows",
         description: "Herramientas nativas para Windows.",
       },
+      ai: {
+        title: "Automatización con IA",
+        description: "Scripts que un agente de IA instala y configura por ti.",
+      },
     },
     career: "Mi recorrido",
     careerTitle: "Aprender. Construir. Evolucionar.",
@@ -455,6 +459,20 @@ export const es = {
           },
         ],
         architecture: "/projects/winclonerx/architecture-es.svg",
+      },
+    },
+    turnontv: {
+      summary:
+        "Script que enciende tu Android TV o Google TV y la cambia a la entrada HDMI del PC cuando este arranca o sale de suspensión, como lo hace una consola.",
+      highlights: [
+        "Incluye un prompt para agentes de IA (Claude Code, Codex, Gemini CLI) que revisa tu TV, te pregunta lo necesario, lo instala todo y lo prueba contigo.",
+        "El agente puede configurar otro PC por SSH, y nunca ve el código de emparejamiento ni las contraseñas: esos los escribes tú.",
+        "Usa el protocolo Android TV Remote, el mismo de la app de Google TV, porque casi ninguna tarjeta gráfica soporta HDMI-CEC. No necesita ADB ni opciones de desarrollador.",
+        "Envía Wake-on-LAN y reintenta durante 90 segundos, sin mandar POWER a una TV que podría estar encendida.",
+        "Se instala como tarea programada en Windows o como servicios de systemd en Linux.",
+      ],
+      media: {
+        cover: "/projects/turnontv/cover.webp",
       },
     },
   },

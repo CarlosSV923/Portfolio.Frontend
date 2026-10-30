@@ -93,6 +93,10 @@ export const en: PortfolioContent = {
         title: "Windows desktop",
         description: "Native tools for Windows.",
       },
+      ai: {
+        title: "AI-assisted automation",
+        description: "Scripts an AI agent installs and sets up for you.",
+      },
     },
     career: "My journey",
     careerTitle: "Learn. Build. Evolve.",
@@ -445,6 +449,20 @@ export const en: PortfolioContent = {
           },
         ],
         architecture: "/projects/winclonerx/architecture-en.svg",
+      },
+    },
+    turnontv: {
+      summary:
+        "Script that turns on your Android TV or Google TV and switches it to the PC's HDMI input when the PC starts or wakes from sleep, the way a game console does.",
+      highlights: [
+        "Comes with a prompt for AI coding agents (Claude Code, Codex, Gemini CLI) that checks your TV, asks what it needs, installs everything and tests it with you.",
+        "The agent can set up another PC over SSH, and never sees the pairing code or passwords: you type those yourself.",
+        "Uses the Android TV Remote protocol, the same one as the Google TV app, because almost no graphics card supports HDMI-CEC. No ADB or developer options needed.",
+        "Sends Wake-on-LAN and retries for 90 seconds, without ever sending POWER to a TV that might be on.",
+        "Installs as a scheduled task on Windows or as systemd services on Linux.",
+      ],
+      media: {
+        cover: "/projects/turnontv/cover.webp",
       },
     },
   },
