@@ -81,13 +81,15 @@ export type ProjectText = {
   /** Bullet points for the details dialog. */
   readonly highlights: readonly string[];
   readonly media: {
-    /** A screenshot, or an app icon drawn on a brand background. */
-    readonly cover: {
-      readonly src: string;
-      readonly kind: "screenshot" | "icon";
-    };
+    /** Screenshot shown on the card. */
+    readonly cover: string;
     /** Animated walkthrough; only loaded when the dialog opens. */
     readonly demo?: string;
+    /** Captioned screenshots shown as a carousel in the dialog. */
+    readonly gallery?: readonly {
+      readonly src: string;
+      readonly caption: string;
+    }[];
     /** Static architecture diagram (SVG). */
     readonly architecture?: string;
   };

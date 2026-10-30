@@ -72,6 +72,7 @@ export const en: PortfolioContent = {
     demo: "View demo",
     releases: "Download",
     walkthrough: "Walkthrough",
+    screenshots: "Screenshots",
     highlights: "Highlights",
     architecture: "Architecture",
     architectureLink: "View interactive architecture",
@@ -86,7 +87,7 @@ export const en: PortfolioContent = {
       },
       nas: {
         title: "NAS apps",
-        description: "Self-hosted on my home TrueNAS.",
+        description: "Self-hosted on a home TrueNAS server.",
       },
       desktop: {
         title: "Windows desktop",
@@ -362,7 +363,7 @@ export const en: PortfolioContent = {
         "Payment gateway for Siigo S.A. that lets its customers pay their invoices quickly and securely.",
       highlights: [],
       media: {
-        cover: { src: "/projects/aurora/cover.webp", kind: "screenshot" },
+        cover: "/projects/aurora/cover.webp",
       },
     },
     gamebook: {
@@ -376,7 +377,7 @@ export const en: PortfolioContent = {
         "Built with spec-driven development, in English and Spanish, with light and dark themes.",
       ],
       media: {
-        cover: { src: "/projects/gamebook/cover-en.webp", kind: "screenshot" },
+        cover: "/projects/gamebook/cover-en.webp",
         demo: "/projects/gamebook/demo-en.webp",
         architecture: "/projects/gamebook/architecture-en.svg",
       },
@@ -392,10 +393,7 @@ export const en: PortfolioContent = {
         "Works with mouse, keyboard, touch screen or gamepad.",
       ],
       media: {
-        cover: {
-          src: "/projects/gameexplorer/cover-en.webp",
-          kind: "screenshot",
-        },
+        cover: "/projects/gameexplorer/cover-en.webp",
         demo: "/projects/gameexplorer/demo-en.webp",
         architecture: "/projects/gameexplorer/architecture-en.svg",
       },
@@ -411,10 +409,7 @@ export const en: PortfolioContent = {
         "Version 1.0, tested on a real TrueNAS SCALE NAS, with its image published to GHCR.",
       ],
       media: {
-        cover: {
-          src: "/projects/videoexplorer/cover-en.webp",
-          kind: "screenshot",
-        },
+        cover: "/projects/videoexplorer/cover-en.webp",
         demo: "/projects/videoexplorer/demo-en.webp",
         architecture: "/projects/videoexplorer/architecture-en.svg",
       },
@@ -430,7 +425,25 @@ export const en: PortfolioContent = {
         ".NET 10 and WPF with DDD, hexagonal architecture and spec-driven development.",
       ],
       media: {
-        cover: { src: "/projects/winclonerx/icon.svg", kind: "icon" },
+        cover: "/projects/winclonerx/screen-1-en.webp",
+        gallery: [
+          {
+            src: "/projects/winclonerx/screen-1-en.webp",
+            caption: "Choose the target disk",
+          },
+          {
+            src: "/projects/winclonerx/screen-2-en.webp",
+            caption: "Review the plan",
+          },
+          {
+            src: "/projects/winclonerx/screen-3-en.webp",
+            caption: "Copy in progress",
+          },
+          {
+            src: "/projects/winclonerx/screen-4-en.webp",
+            caption: "Verified result",
+          },
+        ],
         architecture: "/projects/winclonerx/architecture-en.svg",
       },
     },

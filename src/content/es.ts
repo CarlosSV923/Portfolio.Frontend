@@ -82,6 +82,7 @@ export const es = {
     demo: "Ver demo",
     releases: "Descargar",
     walkthrough: "Recorrido",
+    screenshots: "Capturas",
     highlights: "Lo más destacado",
     architecture: "Arquitectura",
     architectureLink: "Ver arquitectura interactiva",
@@ -96,7 +97,7 @@ export const es = {
       },
       nas: {
         title: "Apps para NAS",
-        description: "Self-hosted en el TrueNAS de mi casa.",
+        description: "Self-hosted en servidor TrueNAS casero.",
       },
       desktop: {
         title: "Escritorio Windows",
@@ -372,7 +373,7 @@ export const es = {
         "Pasarela de pagos para Siigo S.A. con la que sus clientes pagan sus facturas de forma segura y rápida.",
       highlights: [],
       media: {
-        cover: { src: "/projects/aurora/cover.webp", kind: "screenshot" },
+        cover: "/projects/aurora/cover.webp",
       },
     },
     gamebook: {
@@ -386,7 +387,7 @@ export const es = {
         "Hecho con spec-driven development, en español e inglés, con tema claro y oscuro.",
       ],
       media: {
-        cover: { src: "/projects/gamebook/cover-es.webp", kind: "screenshot" },
+        cover: "/projects/gamebook/cover-es.webp",
         demo: "/projects/gamebook/demo-en.webp",
         architecture: "/projects/gamebook/architecture-es.svg",
       },
@@ -402,10 +403,7 @@ export const es = {
         "Se usa con mouse, teclado, pantalla táctil o gamepad.",
       ],
       media: {
-        cover: {
-          src: "/projects/gameexplorer/cover-es.webp",
-          kind: "screenshot",
-        },
+        cover: "/projects/gameexplorer/cover-es.webp",
         demo: "/projects/gameexplorer/demo-es.webp",
         architecture: "/projects/gameexplorer/architecture-es.svg",
       },
@@ -421,10 +419,7 @@ export const es = {
         "Versión 1.0 probada en un NAS TrueNAS SCALE real, con su imagen publicada en GHCR.",
       ],
       media: {
-        cover: {
-          src: "/projects/videoexplorer/cover-es.webp",
-          kind: "screenshot",
-        },
+        cover: "/projects/videoexplorer/cover-es.webp",
         demo: "/projects/videoexplorer/demo-es.webp",
         architecture: "/projects/videoexplorer/architecture-es.svg",
       },
@@ -440,7 +435,25 @@ export const es = {
         ".NET 10 y WPF con DDD, arquitectura hexagonal y spec-driven development.",
       ],
       media: {
-        cover: { src: "/projects/winclonerx/icon.svg", kind: "icon" },
+        cover: "/projects/winclonerx/screen-1-es.webp",
+        gallery: [
+          {
+            src: "/projects/winclonerx/screen-1-es.webp",
+            caption: "Elegir el disco de destino",
+          },
+          {
+            src: "/projects/winclonerx/screen-2-es.webp",
+            caption: "Revisar el plan",
+          },
+          {
+            src: "/projects/winclonerx/screen-3-es.webp",
+            caption: "Clonado en curso",
+          },
+          {
+            src: "/projects/winclonerx/screen-4-es.webp",
+            caption: "Resultado verificado",
+          },
+        ],
         architecture: "/projects/winclonerx/architecture-es.svg",
       },
     },

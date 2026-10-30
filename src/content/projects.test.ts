@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 import { en } from "./en";
 import { es } from "./es";
 import { groupProjects, projectCatalog } from "./projects";
-import { projectCategories } from "./types";
+import { projectCategories, type ProjectText } from "./types";
 
 describe("groupProjects", () => {
   it("keeps the category order and every project once", () => {
@@ -28,8 +28,13 @@ describe("groupProjects", () => {
 describe("project media", () => {
   it("points at files that exist in public/", () => {
     for (const content of [es, en]) {
-      for (const { media } of Object.values(content.projects)) {
-        const files = [media.cover.src, media.demo, media.architecture];
+      for (const { media } of Object.values<ProjectText>(content.projects)) {
+        const files = [
+          media.cover,
+          media.demo,
+          media.architecture,
+          ...(media.gallery ?? []).map((shot) => shot.src),
+        ];
         for (const file of files.filter(Boolean)) {
           expect(existsSync(join("public", file!)), file).toBe(true);
         }

@@ -16,26 +16,9 @@ function ProjectCover({
   project,
   wide,
 }: Readonly<{ project: Project; wide: boolean }>) {
-  const { cover } = project.media;
-
-  if (cover.kind === "icon") {
-    return (
-      <div className="grid h-full place-items-center bg-primary-soft bg-[radial-gradient(circle_at_30%_20%,color-mix(in_oklab,var(--primary)_30%,transparent),transparent_65%)]">
-        <Image
-          src={cover.src}
-          alt=""
-          width={128}
-          height={128}
-          unoptimized
-          className="size-28 drop-shadow-[0_14px_30px_rgb(5_11_22/35%)]"
-        />
-      </div>
-    );
-  }
-
   return (
     <Image
-      src={cover.src}
+      src={project.media.cover}
       alt={project.name}
       fill
       sizes={
