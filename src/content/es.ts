@@ -183,7 +183,7 @@ export const es = {
     email: "carlos.sesme.923@gmail.com",
     address: "Guayaquil, Ecuador",
     github: "https://github.com/CarlosSV923",
-    linkedin: "https://www.linkedin.com/in/carlos-sesme-vera-342769172/",
+    linkedin: "https://www.linkedin.com/in/carlos-sesme",
   },
   about: {
     aboutPicture: "/images/about_picture.jpg",
