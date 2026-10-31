@@ -453,7 +453,7 @@ export const en: PortfolioContent = {
     },
     turnontv: {
       summary:
-        "Script that turns on your Android TV or Google TV and switches it to the PC's HDMI input when the PC starts or wakes from sleep, the way a game console does.",
+        "Script that lets a Windows or Linux PC emulate HDMI-CEC: it turns on an Android TV or Google TV and switches it to a specific HDMI input, the way a game console like the PS5 or Switch does.",
       highlights: [
         "Comes with a prompt for AI coding agents (Claude Code, Codex, Gemini CLI) that checks your TV, asks what it needs, installs everything and tests it with you.",
         "The agent can set up another PC over SSH, and never sees the pairing code or passwords: you type those yourself.",
