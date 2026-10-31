@@ -430,7 +430,7 @@ export const es = {
     },
     winclonerx: {
       summary:
-        "App de Windows que clona el disco del sistema a otro disco (HDD, SSD SATA o NVMe, interno o USB) y deja la copia lista para arrancar.",
+        "App que permite clonar Windows de una unidad de almacenamiento a otra, dejando el sistema listo para usar.",
       highlights: [
         "Un asistente de cinco pasos en español e inglés, según el idioma de Windows.",
         "Si el disco destino es más pequeño, reduce C: temporalmente y la devuelve a su tamaño al terminar, incluso si la clonación falla o se interrumpe.",
@@ -463,7 +463,7 @@ export const es = {
     },
     turnontv: {
       summary:
-        "Script que enciende tu Android TV o Google TV y la cambia a la entrada HDMI del PC cuando este arranca o sale de suspensión, como lo hace una consola.",
+        "Script que permite a una PC con Windows o Linux simular el HDMI-CEC: enciende una Android TV o Google TV y la pone en una entrada HDMI específica, igual que una consola de videojuegos como la PS5 o la Switch.",
       highlights: [
         "Incluye un prompt para agentes de IA (Claude Code, Codex, Gemini CLI) que revisa tu TV, te pregunta lo necesario, lo instala todo y lo prueba contigo.",
         "El agente puede configurar otro PC por SSH, y nunca ve el código de emparejamiento ni las contraseñas: esos los escribes tú.",
