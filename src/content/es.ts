@@ -463,7 +463,7 @@ export const es = {
     },
     turnontv: {
       summary:
-        "Script que permite a una PC con Windows o Linux simular el HDMI-CEC: enciende una Android TV o Google TV y la pone en una entrada HDMI específica, igual que una consola de videojuegos como la PS5 o la Switch.",
+        "Script que permite a una PC con Windows o Linux simular el HDMI-CEC: enciende una Android TV o Google TV y la pone en una entrada HDMI específica, igual que una consola de videojuegos como la PS5 o la Switch. Se instala con un agente de IA como Claude Code, Codex o Gemini CLI, que configura todo por ti.",
       highlights: [
         "Incluye un prompt para agentes de IA (Claude Code, Codex, Gemini CLI) que revisa tu TV, te pregunta lo necesario, lo instala todo y lo prueba contigo.",
         "El agente puede configurar otro PC por SSH, y nunca ve el código de emparejamiento ni las contraseñas: esos los escribes tú.",
