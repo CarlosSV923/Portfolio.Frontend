@@ -33,7 +33,7 @@ export const projectCatalog: readonly ProjectInfo[] = [
       "Docker",
     ),
     links: {
-      demo: "https://gamebook-frontend.vercel.app",
+      demo: "https://gamebook-system.vercel.app",
       repository: github("GameBook.System"),
       architecture: pages("GameBook.System"),
     },
