@@ -430,7 +430,7 @@ export const es = {
     },
     winclonerx: {
       summary:
-        "App de Windows que clona el disco del sistema a otro disco (HDD, SSD SATA o NVMe, interno o USB) y deja la copia lista para arrancar.",
+        "App que permite clonar Windows de una unidad de almacenamiento a otra, dejando el sistema listo para usar.",
       highlights: [
         "Un asistente de cinco pasos en español e inglés, según el idioma de Windows.",
         "Si el disco destino es más pequeño, reduce C: temporalmente y la devuelve a su tamaño al terminar, incluso si la clonación falla o se interrumpe.",

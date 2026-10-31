@@ -420,7 +420,7 @@ export const en: PortfolioContent = {
     },
     winclonerx: {
       summary:
-        "Windows app that clones the system disk to another disk (HDD, SATA or NVMe SSD, internal or USB) and leaves the copy ready to boot.",
+        "App that clones Windows from one storage drive to another, leaving the system ready to use.",
       highlights: [
         "A five-step wizard in English and Spanish, following the Windows language.",
         "If the target disk is smaller, it shrinks C: temporarily and restores its size afterwards, even if cloning fails or is interrupted.",
